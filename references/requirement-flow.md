@@ -14,6 +14,18 @@ Accept URLs, screenshots, design files, PRDs, sketches, competitor pages, and ex
 
 If a design link cannot be accessed, ask for exported screenshots and any interaction notes.
 
+Classify each reference:
+
+- Exact reproduction target: reproduce structure, visuals, and interactions as closely as allowed.
+- Style target: imitate the visual style without copying the original page one-to-one.
+- Functional reference: borrow behavior or flow.
+- Content reference: borrow information architecture or copy structure.
+- Design-system reference: use style rules, tokens, or component patterns.
+
+When a website is a style target, use the Open Design design stage when available. Extract design attributes such as mood, density, typography feel, spacing rhythm, color behavior, component shape, elevation, motion, navigation style, and hierarchy. Confirm what should remain original: brand, content, layout, copy, data, assets, and business flow.
+
+Do not treat Open Design-exported HTML differently from other HTML. Use Open Design-specific context only when `DESIGN.md`, design systems, craft rules, skill examples, project metadata, or artifact notes are available.
+
 ## 3. Business Scope
 
 Confirm whether the project needs:

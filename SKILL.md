@@ -17,10 +17,11 @@ Act as a high-fidelity frontend restoration agent. First analyze, then ask only 
 3. Collect references: URL, screenshot, UI design link, PRD, sketch, competitor page, or existing repo.
 4. Analyze page scope, routes, modules, layout, business flows, states, interactions, data needs, permissions, responsiveness, animation, and scrolling.
 5. Ask only about gaps that cannot be reliably inferred and would affect pages, routing, state, data, layout, scrolling, or implementation.
-6. Generate `layout-confirmation.html` before high-fidelity implementation unless the user explicitly asks to skip it.
-7. Get user confirmation on page structure, navigation, click events, scroll ranges, and business flow.
-8. Implement in the existing project style or the confirmed stack.
-9. Run the app, inspect it in browser or relevant preview tool, take screenshots, verify visual/interaction fidelity, and revise.
+6. When the user needs design exploration, provides Open Design references, or wants to imitate a reference site's style without copying it one-to-one, use the Open Design design-stage rule before layout confirmation.
+7. Generate `layout-confirmation.html` before high-fidelity implementation unless the user explicitly asks to skip it.
+8. Get user confirmation on page structure, navigation, click events, scroll ranges, and business flow.
+9. Implement in the existing project style or the confirmed stack.
+10. Run the app, inspect it in browser or relevant preview tool, take screenshots, verify visual/interaction fidelity, and revise.
 
 Do not start high-fidelity coding before page scope, key interactions, and scroll behavior are confirmed, unless the user explicitly says to decide and proceed.
 
@@ -54,6 +55,28 @@ If no real API contract is provided:
 - Document mock credentials, mock storage, API assumptions, and future backend integration points in the generated project's `README.md`.
 
 If real APIs are later provided, replace the mock service implementation without rewriting the UI flow.
+
+## Open Design Design-Stage Rule
+
+Use Open Design as an optional design-stage tool when:
+
+- The user has no fixed visual reference and wants design exploration.
+- The user provides an Open Design project, `DESIGN.md`, design system, artifact, or Open Design-generated reference.
+- The user provides a reference website as a style target rather than a one-to-one page to copy.
+- The user asks to imitate, borrow, adapt, or be inspired by another product's visual style.
+
+In style-imitation mode:
+
+- Treat the reference website as visual direction, not as the exact information architecture or layout to reproduce.
+- Extract style attributes such as mood, density, typography feel, spacing rhythm, color behavior, component shape, elevation, motion, navigation style, and content hierarchy.
+- Ask what must be original or different: brand, content, page structure, business flow, copy, data model, and assets.
+- Use Open Design or Open Design design-system references to generate or select a suitable design direction before `layout-confirmation.html`.
+- Do not copy protected brand assets, logos, proprietary illustrations, exact copy, or distinctive trade dress unless the user has rights and explicitly asks for it.
+- Still produce the real-scroll `layout-confirmation.html` and get confirmation before final implementation.
+
+Do not special-case Open Design exported HTML. Treat exported HTML like any normal HTML/webpage reference. Only Open Design-specific files such as `DESIGN.md`, design systems, craft rules, skill examples, or artifact metadata provide extra design context.
+
+Open Design can inform design direction and visual standards; FrontendFidelityAgent remains responsible for product scope, route map, interaction map, real-scroll confirmation, mock/API boundaries, implementation, verification, and project README.
 
 ## Layout Confirmation HTML
 

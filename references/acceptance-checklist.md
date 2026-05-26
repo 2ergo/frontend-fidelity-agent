@@ -8,6 +8,8 @@ Use this before final response.
 - Spacing, alignment, color, radius, shadow, typography, and density are close to reference.
 - Responsive behavior matches confirmed desktop/tablet/mobile widths.
 - Long text, dense content, and narrow widths do not break layout.
+- If a reference site was used as a style target, the final UI captures the intended style attributes without copying protected brand assets, exact copy, or distinctive proprietary composition.
+- If Open Design or a design system was used, its chosen design constraints are visible in the final UI.
 
 ## Interaction Fidelity
 
