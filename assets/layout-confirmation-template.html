@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Layout Confirmation</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --line: #aab2bf;
+      --ink: #20242c;
+      --muted: #5b6472;
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --accent: #2563eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+    .app {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) 280px;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .nav,
+    .inspector {
+      padding: 12px;
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      overflow: auto;
+    }
+    .inspector {
+      border-right: 0;
+      border-left: 1px solid var(--line);
+    }
+    .stage {
+      display: grid;
+      grid-template-rows: 56px minmax(0, 1fr);
+      min-width: 0;
+    }
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #e8eef7;
+      border-bottom: 1px solid var(--line);
+    }
+    .canvas {
+      padding: 16px;
+      overflow: auto;
+    }
+    .shell {
+      min-height: 880px;
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: 12px;
+    }
+    .sidebar {
+      height: calc(100vh - 108px);
+      overflow: auto;
+      position: sticky;
+      top: 0;
+      padding: 10px;
+      background: var(--panel);
+      border: 2px dashed var(--line);
+    }
+    .main {
+      height: calc(100vh - 108px);
+      overflow: auto;
+      padding: 10px;
+      background: var(--panel);
+      border: 2px solid var(--line);
+    }
+    .box,
+    .card,
+    .menu-item {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 6px;
+    }
+    .box {
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .card {
+      min-height: 76px;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+    .menu-item {
+      min-height: 34px;
+      margin-bottom: 8px;
+      padding: 8px;
+    }
+    .tag {
+      display: inline-block;
+      margin: 2px 0 8px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 12px;
+    }
+    .nav button,
+    .header button,
+    .card button {
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      text-align: left;
+    }
+    .header button {
+      width: auto;
+      margin: 0;
+    }
+    .hidden { display: none; }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      place-items: center;
+      background: rgba(20, 24, 31, .34);
+    }
+    .modal-backdrop.is-open { display: grid; }
+    .modal {
+      width: min(640px, calc(100vw - 32px));
+      max-height: min(620px, calc(100vh - 32px));
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+    }
+    .modal header,
+    .modal footer {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .modal footer {
+      border-top: 1px solid var(--line);
+      border-bottom: 0;
+    }
+    .modal-body {
+      overflow: auto;
+      padding: 12px;
+    }
+    @media (max-width: 860px) {
+      .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+      }
+      .nav,
+      .inspector {
+        max-height: 180px;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .shell {
+        grid-template-columns: 1fr;
+      }
+      .sidebar,
+      .main {
+        height: 360px;
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="nav">
+      <strong>Pages</strong>
+      <button data-page="home">Home wireframe</button>
+      <button data-page="detail">Detail wireframe</button>
+      <button data-page="settings">Settings wireframe</button>
+      <span class="tag">Left nav scrolls if long</span>
+    </aside>
+
+    <main class="stage">
+      <div class="header">
+        <strong>Sticky Header</strong>
+        <button data-event="Open modal">Open modal</button>
+        <button data-event="Toggle filter drawer">Filter</button>
+      </div>
+
+      <section class="canvas">
+        <div class="page" id="page-home">
+          <div class="box">
+            <strong>Home</strong>
+            <div class="tag">Canvas scrolls; sidebar and main also scroll independently</div>
+          </div>
+          <div class="shell">
+            <aside class="sidebar">
+              <strong>Sticky Sidebar</strong>
+              <div class="tag">internal vertical scroll</div>
+              <div id="sidebarItems"></div>
+            </aside>
+            <section class="main">
+              <strong>Main Content</strong>
+              <div class="tag">internal vertical scroll with placeholder cards</div>
+              <div id="mainCards"></div>
+            </section>
+          </div>
+        </div>
+
+        <div class="page hidden" id="page-detail">
+          <div class="box">
+            <strong>Detail Page</strong>
+            <div class="tag">route target for card clicks</div>
+          </div>
+          <div id="detailCards"></div>
+        </div>
+
+        <div class="page hidden" id="page-settings">
+          <div class="box">
+            <strong>Settings Page</strong>
+            <div class="tag">form and account area placeholder</div>
+          </div>
+          <div id="settingsCards"></div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="inspector">
+      <strong>Inspector</strong>
+      <p id="inspectorText">Click a wireframe area to inspect behavior.</p>
+      <hr>
+      <strong>Scroll Map</strong>
+      <p>Header: sticky. Sidebar: internal scroll. Main: internal scroll. Canvas: page-level preview scroll. Modal body: internal scroll.</p>
+      <strong>Open Questions</strong>
+      <ul>
+        <li>Confirm whole page vs internal main scroll.</li>
+        <li>Confirm modal background scroll lock.</li>
+        <li>Confirm card click target.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="modal-backdrop" id="modal">
+    <section class="modal">
+      <header><strong>Modal State</strong></header>
+      <div class="modal-body" id="modalRows"></div>
+      <footer><button data-close-modal>Close modal</button></footer>
+    </section>
+  </div>
+
+  <script>
+    const inspector = document.querySelector('#inspectorText');
+    const pages = document.querySelectorAll('.page');
+    const modal = document.querySelector('#modal');
+
+    function fillList(target, count, label, withButton) {
+      const node = document.querySelector(target);
+      node.innerHTML = '';
+      for (let i = 1; i <= count; i += 1) {
+        const item = document.createElement('div');
+        item.className = target === '#sidebarItems' ? 'menu-item' : 'card';
+        item.innerHTML = withButton
+          ? `<strong>${label} ${i}</strong><p>Placeholder content to force real scroll.</p><button data-page="detail">Open detail</button>`
+          : `${label} ${i}`;
+        node.appendChild(item);
+      }
+    }
+
+    fillList('#sidebarItems', 34, 'Menu item', false);
+    fillList('#mainCards', 26, 'Card', true);
+    fillList('#detailCards', 18, 'Detail block', false);
+    fillList('#settingsCards', 16, 'Settings row', false);
+    fillList('#modalRows', 28, 'Modal row', false);
+
+    document.addEventListener('click', (event) => {
+      const pageButton = event.target.closest('[data-page]');
+      const eventButton = event.target.closest('[data-event]');
+      const closeModal = event.target.closest('[data-close-modal]');
+
+      if (pageButton) {
+        const page = pageButton.dataset.page;
+        pages.forEach((node) => node.classList.toggle('hidden', node.id !== `page-${page}`));
+        inspector.textContent = `Navigate to ${page}. Confirm this route transition and destination.`;
+      }
+
+      if (eventButton) {
+        const action = eventButton.dataset.event;
+        inspector.textContent = `${action}. Confirm expected state, scroll lock, and close behavior.`;
+        if (action === 'Open modal') modal.classList.add('is-open');
+      }
+
+      if (closeModal) {
+        modal.classList.remove('is-open');
+        inspector.textContent = 'Close modal. Confirm whether outside click and Esc should also close it.';
+      }
+    });
+  </script>
+</body>
+</html>

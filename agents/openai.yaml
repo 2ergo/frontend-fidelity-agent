@@ -1,0 +1,3 @@
+display_name: FrontendFidelityAgent
+short_description: Clarifies scope, confirms real-scroll wireframes, then builds high-fidelity frontends.
+default_prompt: Use FrontendFidelityAgent to clarify requirements, generate a real-scroll layout confirmation HTML, implement the frontend, and verify fidelity.
