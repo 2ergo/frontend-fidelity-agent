@@ -39,6 +39,22 @@ Always consider:
 - States: hover, active, selected, disabled, loading, empty, error, skeleton, long text, narrow viewports.
 - Acceptance: target viewports, screenshot comparison, manual confirmation, required fidelity level.
 
+## Auth and API Placeholder Rule
+
+When login, registration, permissions, or protected actions are in scope, confirm whether real backend APIs already exist.
+
+If no real API contract is provided:
+
+- Implement a frontend mock auth flow rather than pretending a backend exists.
+- Require the user to click the login action to enter the authenticated state.
+- Provide at least one mock username/password or clearly documented mock credential rule.
+- Keep auth and user data access behind replaceable service functions or an API module.
+- Store mock session state in an appropriate local frontend mechanism such as component state, localStorage, sessionStorage, or the project's existing state store.
+- Implement protected route/page behavior, logout, unauthorized state, and user menu behavior according to the confirmed scope.
+- Document mock credentials, mock storage, API assumptions, and future backend integration points in the generated project's `README.md`.
+
+If real APIs are later provided, replace the mock service implementation without rewriting the UI flow.
+
 ## Layout Confirmation HTML
 
 Before high-fidelity implementation, generate a low-fidelity `layout-confirmation.html` when the task has any meaningful layout, route, click, or scroll ambiguity.

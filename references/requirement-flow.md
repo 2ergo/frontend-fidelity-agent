@@ -27,6 +27,23 @@ Confirm whether the project needs:
 
 Ask about account and permissions when the product contains private data, user actions, management pages, commerce, publishing, or personalization.
 
+For login, registration, permissions, or protected actions, also confirm API/data source:
+
+- Are real auth APIs available now?
+- Is there an API document or endpoint contract?
+- What is the token/session storage strategy?
+- How is current user information loaded?
+- How are roles and permissions represented?
+- What happens when an unauthenticated user clicks a protected action?
+
+If no real API contract is provided, default to a frontend mock auth flow:
+
+- Provide a mock username/password.
+- Login only after the user clicks the login button and credentials match the mock rule.
+- Keep API calls behind replaceable service functions or an API module.
+- Store mock session state in localStorage, sessionStorage, component state, or the existing app store.
+- Document mock credentials, storage, assumptions, and future backend integration points in the generated project's README.
+
 ## 4. Pages and Routes
 
 Identify all pages and states:
