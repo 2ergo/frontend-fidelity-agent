@@ -28,7 +28,9 @@ Hard rules:
 - Represent page jumps, click events, overlays, fixed/sticky areas, and unresolved questions in the confirmation HTML.
 - Implement only after the user confirms the layout, scroll map, and interaction map, unless the user explicitly asks you to decide and proceed.
 - Follow existing project conventions and verify with running preview, screenshots, and responsive checks when available.
+- When creating or substantially changing a frontend project, update its `README.md` with install, dev, build, preview/start, test/lint/typecheck, environment, and platform-specific startup instructions.
 
 Acceptance:
 
 - Visual layout, typography, spacing, colors, radii, shadows, responsive behavior, interactions, states, animations, and scrolling should match the confirmed reference as closely as feasible.
+- The project README should make the app runnable by another developer without guessing commands.

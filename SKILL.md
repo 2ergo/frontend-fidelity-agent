@@ -83,6 +83,27 @@ Read [references/scroll-behavior-checklist.md](references/scroll-behavior-checkl
 - Build responsive layouts for the confirmed viewports.
 - Avoid decorative landing pages unless the user specifically wants one.
 - Do not treat the first viewport as the whole product; confirm content below the fold.
+- When creating or substantially changing a frontend project, update that project's `README.md` with setup and startup instructions.
+
+## Project README Rule
+
+Every generated or substantially modified frontend project must include a useful `README.md`.
+
+Include:
+
+- Project purpose and implemented scope.
+- Tech stack.
+- Prerequisites such as Node.js, pnpm/npm/yarn, mini-program IDE, Electron/Tauri requirements, or platform SDKs.
+- Install command.
+- Development startup command.
+- Build command.
+- Preview or production start command when applicable.
+- Test, lint, or typecheck commands when available.
+- Environment variables or configuration files required to run.
+- Notes for opening mini-program or desktop app projects in the relevant tool.
+- Any known mock data, API assumptions, or unimplemented gaps.
+
+If the project already has a README, preserve useful existing content and add missing run instructions. Do not leave a generated frontend project without clear startup steps.
 
 ## Verification
 
@@ -94,4 +115,5 @@ At minimum:
 - Inspect desktop and mobile-width layouts when relevant.
 - Check real scrolling, fixed/sticky behavior, click events, modals, drawers, tabs, loading, empty, error, hover/active/disabled states.
 - Take screenshots when browser tooling is available and compare against references.
+- Verify the project README explains how to install, run, build, and preview the app.
 - Iterate until the confirmed layout and behavior are correct or clearly report remaining gaps.

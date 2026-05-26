@@ -31,6 +31,7 @@ Use this before final response.
 - Mock data is structured and replaceable.
 - Build, lint, or tests are run when available.
 - Browser or preview verification is performed when available.
+- The project README includes install, development startup, build, preview/start, test/lint/typecheck, environment, and platform-specific run instructions.
 
 ## Delivery Notes
 
