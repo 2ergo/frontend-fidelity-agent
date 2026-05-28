@@ -15,6 +15,16 @@ Use this checklist to avoid missing behavior hidden behind static UI.
 
 For each, define route, state change, modal/drawer, form submit, toast, or disabled behavior.
 
+For URL references, actively inspect clickable controls when possible. Do not infer every click from static appearance only.
+
+Record:
+
+- Default, hover, active, focus, selected, disabled state.
+- Click target or state change.
+- Open/close behavior.
+- Outside click or escape behavior for overlays.
+- Transition/motion behavior.
+
 ## Overlays
 
 - Modal.

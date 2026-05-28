@@ -10,6 +10,7 @@ Use this before final response.
 - Long text, dense content, and narrow widths do not break layout.
 - If a reference site was used as a style target, the final UI captures the intended style attributes without copying protected brand assets, exact copy, or distinctive proprietary composition.
 - If Open Design or a design system was used, its chosen design constraints are visible in the final UI.
+- If a URL was used as an exact reference, visible styling should be deliberately matched: color palette, typography feel, spacing rhythm, radius, shadows, layout density, backgrounds, icons, media treatment, and responsive behavior.
 
 ## Interaction Fidelity
 
@@ -18,6 +19,7 @@ Use this before final response.
 - Hover, active, focus, selected, disabled, loading, empty, and error states are implemented where visible or required.
 - Animations and transitions match the reference rhythm when feasible.
 - If auth is in scope without real APIs, mock login requires a user click, validates documented mock credentials, stores mock session state, supports logout, and keeps API integration behind replaceable service functions.
+- If a URL was used as a reference, key hover and click effects from the reference were inspected or explicitly marked as unavailable, then implemented or documented.
 
 ## Scroll Fidelity
 

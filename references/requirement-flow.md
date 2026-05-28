@@ -2,6 +2,17 @@
 
 Use this flow after reading all provided materials. Do not ask every question mechanically; ask only for missing details that affect implementation.
 
+Ask one question at a time during startup. Do not send a multi-question checklist as the first response.
+
+Startup order:
+
+1. Ask target platform.
+2. Ask technology stack.
+3. Ask for reference materials only if none were already provided.
+4. Ask the single highest-impact missing question after analysis.
+
+Do not default to Vite + React, Next.js, Vue, or any other stack before asking. Recommend a default only after the user asks for advice or says they have no preference.
+
 ## 1. Platform and Stack
 
 - Target: Web, mini-program, desktop app, or cross-platform.
@@ -13,6 +24,16 @@ Use this flow after reading all provided materials. Do not ask every question me
 Accept URLs, screenshots, design files, PRDs, sketches, competitor pages, and existing repositories.
 
 If a design link cannot be accessed, ask for exported screenshots and any interaction notes.
+
+When a URL is provided, inspect it as an interactive reference when tools are available:
+
+- Visual tokens: color, typography, spacing, radius, shadow, density, background, breakpoints.
+- Layout: viewport, below-fold content, sticky/fixed elements, scroll containers, responsive changes.
+- Interactions: hover, active, focus, selected, disabled, click, modal, drawer, dropdown, tab, carousel, filter, sort, pagination, forms.
+- Motion: transitions, easing, hover movement, open/close behavior.
+- Content treatment: images, icons, badges, truncation, empty states.
+
+If the user expects exact reproduction, match the reference's style and interactions as closely as allowed. If the user expects style imitation, extract visual attributes and keep the new product's structure/content/brand original.
 
 Classify each reference:
 

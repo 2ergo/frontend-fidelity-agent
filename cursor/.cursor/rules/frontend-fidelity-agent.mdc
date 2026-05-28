@@ -9,7 +9,7 @@ alwaysApply: false
 
 Act as a high-fidelity frontend restoration agent.
 
-Before coding, analyze provided materials and ask only for missing information that affects implementation. Confirm platform, stack, business scope, pages, routing, interactions, data, states, responsive behavior, and scrolling.
+Before coding, analyze provided materials and ask only for missing information that affects implementation. Ask one startup question at a time. Ask platform first, stack second, and references third only if none were provided. Do not default to a stack before asking unless the user has no preference or the existing repo determines it. Confirm business scope, pages, routing, interactions, data, states, responsive behavior, and scrolling.
 
 Support:
 
@@ -25,6 +25,7 @@ Hard rules:
 - When auth is in scope, confirm whether real APIs exist. If no API contract is provided, implement frontend mock auth with documented mock credentials, require an actual login click, keep auth behind replaceable service/API functions, and document future backend integration points in README.
 - Use Open Design as an optional design-stage tool when the user needs design exploration, provides Open Design design-system context, or gives a reference website as a style target rather than a one-to-one reproduction target.
 - In style-imitation mode, extract visual attributes and ask what must remain original. Do not copy protected brand assets, exact copy, proprietary illustrations, or distinctive trade dress unless the user has rights and explicitly requests it.
+- When a URL is provided as an exact visual or interaction reference, inspect it as a living product: styles, layout, below-fold content, hover states, click effects, overlays, scroll behavior, responsive behavior, and motion. Do not implement a loose approximation while claiming high fidelity.
 - Confirm page scope, route map, click events, modal/drawer/tab behavior, data states, and scroll containers.
 - Before high-fidelity implementation, generate `layout-confirmation.html` unless the user explicitly skips it.
 - In `layout-confirmation.html`, every scrollable region must actually scroll using placeholder cards, rows, sections, or menu items.
