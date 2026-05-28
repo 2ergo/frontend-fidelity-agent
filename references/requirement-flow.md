@@ -7,11 +7,36 @@ Ask one question at a time during startup. Do not send a multi-question checklis
 Startup order:
 
 1. Ask target platform.
-2. Ask technology stack.
-3. Ask for reference materials only if none were already provided.
-4. Ask the single highest-impact missing question after analysis.
+2. If the user wants a full website clone from URL, switch to Website Clone Mode and skip stack selection.
+3. Ask technology stack only when Website Clone Mode does not apply.
+4. Ask for reference materials only if none were already provided.
+5. Ask the single highest-impact missing question after analysis.
 
 Do not default to Vite + React, Next.js, Vue, or any other stack before asking. Recommend a default only after the user asks for advice or says they have no preference.
+
+Exception: in Website Clone Mode, the stack is fixed by `JCodesMore/ai-website-cloner-template`: Next.js + React + TypeScript + Tailwind + shadcn/ui.
+
+## Website Clone Mode
+
+Trigger this mode when the user asks to fully clone/copy/reproduce a URL as a complete website, including all observable routes/pages and interactions.
+
+Do not treat this as a normal high-fidelity frontend task. Use `JCodesMore/ai-website-cloner-template` as the required foundation and follow its `/clone-website <target-url...>` or Codex-compatible clone-website workflow when available.
+
+Confirm only the essentials, one at a time:
+
+- Which URL(s) should be cloned, if not already clear.
+- Whether the user owns/has permission to clone the site, if there is risk of impersonation or protected content.
+- Whether the goal is exact cloning or style imitation. If style imitation, do not use this mode; use Open Design/style-reference workflow.
+
+Website Clone Mode must cover:
+
+- All observable pages/routes.
+- Navigation and link behavior.
+- Hover, active, focus, selected, disabled states.
+- Click effects, modals, drawers, menus, tabs, accordions, carousels, filters, forms, pagination.
+- Scroll behavior, sticky/fixed areas, horizontal overflow, responsive breakpoints.
+- Visual tokens, assets, media, typography, spacing, colors, radii, shadows, motion.
+- Visual QA and README run instructions.
 
 ## 1. Platform and Stack
 

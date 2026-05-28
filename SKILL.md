@@ -11,19 +11,20 @@ Act as a high-fidelity frontend restoration agent. First analyze, then ask only 
 
 1. Ask exactly one startup question at a time. Do not present a multi-question checklist as the first response.
 2. First ask the target platform: Web, mini-program, or desktop app.
-3. Then ask the technology stack as its own separate question:
+3. If the user wants to fully clone an existing website from URL, switch to Website Clone Mode and do not ask for a technology stack.
+4. Otherwise, ask the technology stack as its own separate question:
    - Web: React, Vue, Next.js, Vite.
    - Mini-program: WeChat Mini Program, Taro, uni-app.
    - Desktop: Electron, Tauri.
-4. Only propose a default stack after the user says they have no preference, or when an existing repo clearly determines the stack. Do not silently choose Vite + React before asking.
-5. Collect references: URL, screenshot, UI design link, PRD, sketch, competitor page, or existing repo.
-6. Analyze page scope, routes, modules, layout, business flows, states, interactions, data needs, permissions, responsiveness, animation, and scrolling.
-7. Ask only about gaps that cannot be reliably inferred and would affect pages, routing, state, data, layout, scrolling, or implementation.
-8. When the user needs design exploration, provides Open Design references, or wants to imitate a reference site's style without copying it one-to-one, use the Open Design design-stage rule before layout confirmation.
-9. Generate `layout-confirmation.html` before high-fidelity implementation unless the user explicitly asks to skip it.
-10. Get user confirmation on page structure, navigation, click events, scroll ranges, and business flow.
-11. Implement in the existing project style or the confirmed stack.
-12. Run the app, inspect it in browser or relevant preview tool, take screenshots, verify visual/interaction fidelity, and revise.
+5. Only propose a default stack after the user says they have no preference, or when an existing repo clearly determines the stack. Do not silently choose Vite + React before asking.
+6. Collect references: URL, screenshot, UI design link, PRD, sketch, competitor page, or existing repo.
+7. Analyze page scope, routes, modules, layout, business flows, states, interactions, data needs, permissions, responsiveness, animation, and scrolling.
+8. Ask only about gaps that cannot be reliably inferred and would affect pages, routing, state, data, layout, scrolling, or implementation.
+9. When the user needs design exploration, provides Open Design references, or wants to imitate a reference site's style without copying it one-to-one, use the Open Design design-stage rule before layout confirmation.
+10. Generate `layout-confirmation.html` before high-fidelity implementation unless the user explicitly asks to skip it or Website Clone Mode applies.
+11. Get user confirmation on page structure, navigation, click events, scroll ranges, and business flow.
+12. Implement in the existing project style or the confirmed stack.
+13. Run the app, inspect it in browser or relevant preview tool, take screenshots, verify visual/interaction fidelity, and revise.
 
 Do not start high-fidelity coding before page scope, key interactions, and scroll behavior are confirmed, unless the user explicitly says to decide and proceed.
 
@@ -34,6 +35,7 @@ Ask one question at a time during startup and confirmation gates.
 - Do not send a numbered list of multiple questions as the first response.
 - Ask platform first.
 - Ask stack second.
+- Skip the stack question only when Website Clone Mode applies; in that mode the stack is fixed by the clone template.
 - Ask reference material third only if the user has not already provided it.
 - After analyzing provided material, ask the single highest-impact missing question next.
 - Group details only after the user asks for a summary or after enough context has been collected.
@@ -50,6 +52,41 @@ Good second question:
 ```text
 Which technology stack do you want to use? For example React/Vite, Vue/Vite, Next.js, WeChat Mini Program, Taro, uni-app, Electron, or Tauri.
 ```
+
+## Website Clone Mode
+
+Use Website Clone Mode when the user gives one or more URLs and asks to fully clone, copy, reproduce, restore, mirror, or one-to-one rebuild the whole website, including all pages/routes and click/hover/scroll effects.
+
+Examples that should trigger this mode:
+
+- "Copy this whole website."
+- "Fully clone this URL."
+- "Recreate all pages and routes from this site."
+- "I want the same website, including clicks and hover effects."
+- "Directly copy the entire site."
+
+In Website Clone Mode:
+
+- Force the project foundation to use `JCodesMore/ai-website-cloner-template`.
+- Force the template stack: Next.js + React + TypeScript + Tailwind + shadcn/ui.
+- Do not ask the user which stack to use.
+- Prefer the template's `/clone-website <target-url...>` workflow or its Codex-compatible clone-website skill/instructions when available.
+- Use the template's reconnaissance expectations: screenshots, design token extraction, asset extraction, interaction sweep, responsive sweep, component specs, build, assembly, and visual QA.
+- Preserve the user's requirement for all observable pages/routes, navigation, hover states, click effects, scrolling, responsive behavior, overlays, forms, media, and motion.
+- Do not replace this mode with the generic `layout-confirmation.html` workflow unless the user explicitly asks for a planning wireframe first.
+- Keep the normal safety boundary: do not use cloning for phishing, impersonation, illegal scraping, terms-of-service violations, or copying protected brand assets/content without rights.
+- Update the generated project's `README.md` with the template stack, install/run/build/check commands, source URL(s), clone scope, and any gaps.
+
+Recommended setup pattern:
+
+```text
+git clone https://github.com/JCodesMore/ai-website-cloner-template.git <project-name>
+cd <project-name>
+npm install
+/clone-website <target-url>
+```
+
+If `/clone-website` is not directly callable in the current agent environment, follow the cloned template's `AGENTS.md` and `.codex/skills/clone-website/SKILL.md` instructions manually instead of improvising a loose clone.
 
 ## Required Confirmation Areas
 
