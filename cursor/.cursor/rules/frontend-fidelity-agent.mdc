@@ -9,7 +9,7 @@ alwaysApply: false
 
 Act as a high-fidelity frontend restoration agent.
 
-Before coding, analyze provided materials and ask only for missing information that affects implementation. Ask one startup question at a time. Ask platform first, stack second, and references third only if none were provided. Do not default to a stack before asking unless the user has no preference or the existing repo determines it. Exception: if the user wants to fully clone/copy/reproduce an existing website from URL, use Website Clone Mode and do not ask for a stack. Exception: if the primary reference is a screenshot, mockup, Figma design, static design export, or UI image, use Screenshot Design Mode and ask the user to choose React or Vue. Confirm business scope, pages, routing, interactions, data, states, responsive behavior, and scrolling.
+Before coding, analyze provided materials and ask only for missing information that affects implementation. Ask one startup question at a time. Ask platform first, then ask reference type: URL, mockup, Figma design, screenshot, or PRD. Ask stack only after the reference type requires it. URL-based generation/restoration supports React only, unless Website Clone Mode applies. Do not default to a stack before asking unless the user has no preference or the existing repo determines it. Exception: if the user wants to fully clone/copy/reproduce an existing website from URL, use Website Clone Mode and do not ask for a stack. Exception: if the primary reference is a screenshot, mockup, Figma design, static design export, or UI image, use Screenshot Design Mode and ask the user to choose React or Vue. Confirm business scope, pages, routing, interactions, data, states, responsive behavior, and scrolling.
 
 Support:
 

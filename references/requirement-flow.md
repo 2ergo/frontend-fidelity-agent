@@ -6,18 +6,23 @@ Ask one question at a time during startup. Do not send a multi-question checklis
 
 Startup order:
 
-1. Ask target platform.
-2. If the user wants a full website clone from URL, switch to Website Clone Mode and skip stack selection.
-3. If the user's primary reference is a screenshot, mockup, Figma design, static design export, or UI image, switch to Screenshot Design Mode and ask React or Vue.
-4. Ask technology stack only when neither Website Clone Mode nor Screenshot Design Mode applies.
-5. Ask for reference materials only if none were already provided.
-6. Ask the single highest-impact missing question after analysis.
+1. Ask target platform and confirm Web frontend.
+2. Ask reference type: URL, mockup, Figma design, screenshot, or PRD.
+3. If the reference type is URL:
+   - If the user wants full website cloning, switch to Website Clone Mode and skip stack selection.
+   - Otherwise, use React only for URL-based generation/restoration.
+4. If the reference type is screenshot, mockup, Figma design, static design export, or UI image, switch to Screenshot Design Mode and ask React or Vue.
+5. If the reference type is PRD, ask technology stack unless an existing repo determines it.
+6. Ask for reference materials only if none were already provided.
+7. Ask the single highest-impact missing question after analysis.
 
 Do not default to Vite + React, Next.js, Vue, or any other stack before asking. Recommend a default only after the user asks for advice or says they have no preference.
 
 Exception: in Website Clone Mode, the stack is fixed by `JCodesMore/ai-website-cloner-template`: Next.js + React + TypeScript + Tailwind + shadcn/ui.
 
 Exception: in Screenshot Design Mode, the generation stack must be React + Tailwind or Vue + Tailwind, and the user must choose React or Vue.
+
+Exception: URL-based generation/restoration outside Website Clone Mode supports React only.
 
 ## Website Clone Mode
 

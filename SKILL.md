@@ -11,19 +11,21 @@ Act as a high-fidelity frontend restoration agent. First analyze, then ask only 
 
 1. Ask exactly one startup question at a time. Do not present a multi-question checklist as the first response.
 2. Confirm that the target is a Web frontend.
-3. If the user wants to fully clone an existing website from URL, switch to Website Clone Mode and do not ask for a technology stack.
-4. If the user's primary reference is a screenshot, mockup, Figma design, static design export, or UI image, switch to Screenshot Design Mode and ask the user to choose React or Vue.
-5. Otherwise, ask the technology stack as its own separate question:
-   - Web: React, Vue, Next.js, Vite.
-6. Only propose a default stack after the user says they have no preference, or when an existing repo clearly determines the stack. Do not silently choose Vite + React before asking.
-7. Collect references: URL, screenshot, UI design link, PRD, sketch, competitor page, or existing repo.
-8. Analyze page scope, routes, modules, layout, business flows, states, interactions, data needs, permissions, responsiveness, animation, and scrolling.
-9. Ask only about gaps that cannot be reliably inferred and would affect pages, routing, state, data, layout, scrolling, or implementation.
-10. When the user needs design exploration, provides Open Design references, or wants to imitate a reference site's style without copying it one-to-one, use the Open Design design-stage rule before layout confirmation.
-11. Generate `layout-confirmation.html` before high-fidelity implementation unless the user explicitly asks to skip it or Website Clone Mode applies.
-12. Get user confirmation on page structure, navigation, click events, scroll ranges, and business flow.
-13. Implement in the existing project style or the confirmed stack.
-14. Run the app, inspect it in browser or relevant preview tool, take screenshots, verify visual/interaction fidelity, and revise.
+3. Ask the reference type as the second startup question: URL, mockup, Figma design, screenshot, or PRD.
+4. If the user provides a URL:
+   - If they want a full website clone, switch to Website Clone Mode and do not ask for a technology stack.
+   - Otherwise, use React only for URL-based generation/restoration.
+5. If the user's primary reference is a screenshot, mockup, Figma design, static design export, or UI image, switch to Screenshot Design Mode and ask the user to choose React or Vue.
+6. If the user's primary reference is a PRD, ask the technology stack as its own separate question unless an existing repo determines it.
+7. Only propose a default stack after the user says they have no preference, or when an existing repo clearly determines the stack. Do not silently choose Vite + React before asking.
+8. Collect the actual reference file/link/content.
+9. Analyze page scope, routes, modules, layout, business flows, states, interactions, data needs, permissions, responsiveness, animation, and scrolling.
+10. Ask only about gaps that cannot be reliably inferred and would affect pages, routing, state, data, layout, scrolling, or implementation.
+11. When the user needs design exploration, provides Open Design references, or wants to imitate a reference site's style without copying it one-to-one, use the Open Design design-stage rule before layout confirmation.
+12. Generate `layout-confirmation.html` before high-fidelity implementation unless the user explicitly asks to skip it or Website Clone Mode applies.
+13. Get user confirmation on page structure, navigation, click events, scroll ranges, and business flow.
+14. Implement in the existing project style or the confirmed stack.
+15. Run the app, inspect it in browser or relevant preview tool, take screenshots, verify visual/interaction fidelity, and revise.
 
 Do not start high-fidelity coding before page scope, key interactions, and scroll behavior are confirmed, unless the user explicitly says to decide and proceed.
 
@@ -33,7 +35,9 @@ Ask one question at a time during startup and confirmation gates.
 
 - Do not send a numbered list of multiple questions as the first response.
 - Ask platform first.
-- Ask stack second.
+- Ask reference type second: URL, mockup, Figma design, screenshot, or PRD.
+- Ask stack only after the reference type requires it.
+- URL references support React only, unless Website Clone Mode applies.
 - Skip the stack question only when Website Clone Mode applies; in that mode the stack is fixed by the clone template.
 - In Screenshot Design Mode, ask specifically whether the user wants React or Vue.
 - Ask reference material third only if the user has not already provided it.
@@ -50,7 +54,7 @@ Are you building a Web frontend?
 Good second question:
 
 ```text
-Which Web technology stack do you want to use? For example React/Vite, Vue/Vite, or Next.js.
+What kind of reference do you have: URL, mockup, Figma design, screenshot, or PRD?
 ```
 
 ## Website Clone Mode
