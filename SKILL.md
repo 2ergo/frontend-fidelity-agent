@@ -1,6 +1,6 @@
 ---
 name: frontend-fidelity-agent
-description: High-fidelity frontend restoration and implementation workflow for Codex. Use when the user asks for /FrontendFidelityAgent, FrontendFidelityAgent, frontend fidelity agent, UI restore agent, or wants to build or reproduce a Web or mini-program frontend from references such as URLs, screenshots, Figma/Blue Lake/MasterGo designs, PRDs, sketches, competitor pages, or existing repositories. The skill clarifies requirements, confirms business scope, generates a real-scroll layout-confirmation HTML, then implements and verifies visual and interaction fidelity.
+description: High-fidelity Web frontend restoration and implementation workflow for Codex. Use when the user asks for /FrontendFidelityAgent, FrontendFidelityAgent, frontend fidelity agent, UI restore agent, or wants to build or reproduce a Web frontend from references such as URLs, screenshots, Figma/Blue Lake/MasterGo designs, PRDs, sketches, competitor pages, or existing repositories. The skill clarifies requirements, confirms business scope, generates a real-scroll layout-confirmation HTML, then implements and verifies visual and interaction fidelity.
 ---
 
 # FrontendFidelityAgent
@@ -10,11 +10,10 @@ Act as a high-fidelity frontend restoration agent. First analyze, then ask only 
 ## Core Workflow
 
 1. Ask exactly one startup question at a time. Do not present a multi-question checklist as the first response.
-2. First ask the target platform: Web or mini-program.
+2. Confirm that the target is a Web frontend.
 3. If the user wants to fully clone an existing website from URL, switch to Website Clone Mode and do not ask for a technology stack.
 4. Otherwise, ask the technology stack as its own separate question:
    - Web: React, Vue, Next.js, Vite.
-   - Mini-program: WeChat Mini Program, Taro, uni-app.
 5. Only propose a default stack after the user says they have no preference, or when an existing repo clearly determines the stack. Do not silently choose Vite + React before asking.
 6. Collect references: URL, screenshot, UI design link, PRD, sketch, competitor page, or existing repo.
 7. Analyze page scope, routes, modules, layout, business flows, states, interactions, data needs, permissions, responsiveness, animation, and scrolling.
@@ -43,13 +42,13 @@ Ask one question at a time during startup and confirmation gates.
 Good first question:
 
 ```text
-Are you building a Web app or a mini-program?
+Are you building a Web frontend?
 ```
 
 Good second question:
 
 ```text
-Which technology stack do you want to use? For example React/Vite, Vue/Vite, Next.js, WeChat Mini Program, Taro, or uni-app.
+Which Web technology stack do you want to use? For example React/Vite, Vue/Vite, or Next.js.
 ```
 
 ## Website Clone Mode
@@ -192,7 +191,6 @@ Use enough placeholder content to trigger real overflow:
 - Sidebar scroll: give the sidebar a constrained height and 20-40 menu items.
 - Table horizontal scroll: make the table wider than its container.
 - Modal or drawer scroll: constrain the overlay body and add enough rows/cards.
-- Mini-program scroll-view: simulate a fixed-height scroll container.
 
 Verify that intended scroll containers scroll, fixed/sticky regions remain in place, and non-scroll containers do not accidentally scroll.
 
@@ -218,14 +216,13 @@ Include:
 
 - Project purpose and implemented scope.
 - Tech stack.
-- Prerequisites such as Node.js, pnpm/npm/yarn, mini-program IDE, or platform SDKs.
+- Prerequisites such as Node.js, pnpm/npm/yarn, or platform SDKs.
 - Install command.
 - Development startup command.
 - Build command.
 - Preview or production start command when applicable.
 - Test, lint, or typecheck commands when available.
 - Environment variables or configuration files required to run.
-- Notes for opening mini-program projects in the relevant tool.
 - Any known mock data, API assumptions, or unimplemented gaps.
 
 If the project already has a README, preserve useful existing content and add missing run instructions. Do not leave a generated frontend project without clear startup steps.

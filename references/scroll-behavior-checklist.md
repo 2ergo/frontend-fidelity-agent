@@ -15,7 +15,6 @@ Confirm each container:
 - Drawer body.
 - Dropdown menu.
 - Mobile bottom-sheet.
-- Mini-program `scroll-view`.
 
 ## Required Behavior
 

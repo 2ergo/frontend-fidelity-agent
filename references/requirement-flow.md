@@ -40,8 +40,8 @@ Website Clone Mode must cover:
 
 ## 1. Platform and Stack
 
-- Target: Web, mini-program, or cross-platform mini-program.
-- Stack: existing repo stack, React, Vue, Next.js, Vite, WeChat Mini Program, Taro, or uni-app.
+- Target: Web frontend.
+- Stack: existing repo stack, React, Vue, Next.js, or Vite.
 - Constraints: package manager, UI library, browser support, mobile support, deployment target.
 
 ## 2. References
