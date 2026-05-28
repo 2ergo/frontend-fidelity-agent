@@ -29,6 +29,7 @@ Use this before final response.
 - If auth is in scope without real APIs, mock login requires a user click, validates documented mock credentials, stores mock session state, supports logout, and keeps API integration behind replaceable service functions.
 - If a URL was used as a reference, key hover and click effects from the reference were inspected or explicitly marked as unavailable, then implemented or documented.
 - Every discovered interaction/motion item is implemented, mocked, replaced with an approved placeholder, or listed as a gap with the reason.
+- Every discovered carousel/gallery/slider/card rail implements its observed controls, pagination, active states, hover/click/focus behavior, drag/swipe or scroll-snap behavior, motion timing, responsive variants, and media behavior, or lists a gap with the reason.
 
 ## Scroll Fidelity
 

@@ -155,6 +155,7 @@ Agent 必须遵守：
 - 触发方式：hover、click、focus、active、scroll、resize、drag、load、submit、media event。
 - 区域：Header、Hero、Nav、产品导航、section nav、Card、List、Form、Menu、Drawer、Modal、Carousel、Video、CTA、Footer。
 - 动态 UI：滚动驱动 Header/Nav 变化、sticky section title、CTA 出现/隐藏、section reveal、lazy load、parallax、元素缩放/淡入、页面底部状态变化。
+- 复杂组件：carousel、slider、gallery、film strip、横向卡片轨道、媒体查看器、产品选择器、Tabbed content。
 
 实现前需要形成 interaction/motion inventory，可以是 `docs/reconnaissance.md`，也可以是实现计划里的表格。至少记录：
 
@@ -164,12 +165,28 @@ Agent 必须遵守：
 - 初始状态：位置、尺寸、颜色、内容、可见性。
 - 变化后状态：变化的属性和内容。
 - 动效：duration、easing 感觉、delay、方向、透明度、位移、缩放。
+- 复杂组件行为：controls、pagination、drag/swipe、scroll snap、autoplay/pause、loop/clamp、keyboard/focus、active/disabled、可见卡片数量、露出半张卡片、移动端差异。
 - 滚动阈值：top、进入 section、离开 section、接近底部等。
 - 响应式差异：large-screen、tablet、mobile。
 - 实现状态：implemented / mocked / placeholder / gap。
 - 备注：专有素材替换、无法访问、需要用户确认。
 
 例如 Apple 产品页常见的行为：初始 Header 是全局导航；向下滚动到阈值后，变成产品局部导航或吸顶胶囊栏，并出现 Explore、Buy、Watch film 等 CTA。两种状态及其过渡都必须被侦察、记录并实现或列为 gap。
+
+### 轮播图 / Gallery / Slider 规则
+
+Apple 产品页这类页面常见的 Highlights 轮播、横向卡片、影片卡片、产品颜色选择器，都不能被静态截图或普通图片列表替代。
+
+Agent 必须侦察并实现：
+
+- 下一张/上一张按钮、分页点、缩略图、Tab、进度条、播放/暂停等控件。
+- 当前项、上一项、下一项、disabled、selected、hover、focus、active 状态。
+- 鼠标 hover、点击、拖拽、触摸滑动、键盘焦点/方向键行为。
+- slide/fade/scale 动效、duration、easing、惯性、scroll snap、loop 或边界禁用行为。
+- 图片/视频 lazy-load、autoplay、pause、caption/CTA 随卡片变化。
+- 桌面端多卡片、露出半张卡片、移动端 swipe/scroll-snap 等响应式差异。
+
+如果因为权限、素材或技术限制无法实现某个轮播行为，必须在交付说明中列为 gap，不能默默降级成静态图。
 
 ## PRD + OpenDesign 生成模式
 
@@ -273,6 +290,7 @@ https://github.com/abi/screenshot-to-code
 - hover、active、focus、selected、disabled、loading、empty、error 等状态。
 - 点击按钮、卡片、导航、菜单、Tab、筛选、弹窗、抽屉、下拉、分页、表单等交互。
 - 动效节奏、hover 动效、展开/关闭动画、section reveal、media behavior、页面切换或轮播行为。
+- 轮播图、gallery、slider、横向卡片轨道、媒体查看器、产品选择器的控件、分页、hover、click、drag/swipe、scroll snap、autoplay/pause 和响应式行为。
 - 滚动阈值变化，例如 Header 从全局导航变成产品导航、CTA 出现/隐藏、section nav 吸顶。
 
 如果无法访问 URL 或无法检查交互状态，Agent 必须说明限制，并向用户索要截图、录屏或交互说明。
@@ -401,6 +419,7 @@ PRD 生成前端：
 - 字体、间距、颜色、圆角、阴影、响应式一致。
 - 所有可见交互可用。
 - URL 类任务已完成全页交互/动效侦察，发现项已实现或列为 gap。
+- 轮播图、gallery、slider、横向卡片轨道等复杂组件的 hover、click、drag/swipe、pagination、active state、motion 和响应式行为已实现或列为 gap。
 - hover、active、loading、empty、error、disabled 等状态完整。
 - 动效节奏接近参考。
 - 滚动范围和 fixed/sticky 行为符合确认稿。

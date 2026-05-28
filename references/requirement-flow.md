@@ -45,6 +45,7 @@ Website Clone Mode must cover:
 - Navigation and link behavior.
 - Hover, active, focus, selected, disabled states.
 - Click effects, modals, drawers, menus, tabs, accordions, carousels, filters, forms, pagination.
+- Carousel/gallery/slider behavior: controls, drag/swipe, scroll snap, pagination, active states, hover/click/focus, autoplay/pause, loop/clamp, responsive variants.
 - Scroll behavior, sticky/fixed areas, horizontal overflow, responsive breakpoints.
 - Visual tokens, assets, media, typography, spacing, colors, radii, shadows, motion.
 - Proprietary media handling: do not directly reuse protected images, logos, brand assets, paid media, or distinctive artwork. Preserve geometry with same-size solid-color/gradient placeholder divs, and keep hover/click/motion behavior. If imagery is required, use generated or permissively licensed replacement images with matching role/aspect/mood.
@@ -117,6 +118,7 @@ When a URL is provided, inspect it as an interactive reference when tools are av
 - Layout: viewport, below-fold content, sticky/fixed elements, scroll containers, responsive changes.
 - Interactions: hover, active, focus, selected, disabled, click, modal, drawer, dropdown, tab, carousel, filter, sort, pagination, forms.
 - Motion: transitions, easing, hover movement, open/close behavior, section reveal, media behavior, scroll-triggered UI changes.
+- Complex components: carousel, gallery, slider, film strip, product selector, media viewer, horizontal rail, tabbed content. Inspect controls, pagination, active/disabled states, drag/swipe, scroll snap, autoplay/pause, keyboard/focus, item sizing, peeking cards, and responsive behavior.
 - Content treatment: images, icons, badges, truncation, empty states.
 
 Before implementation, create an interaction/motion inventory. Cover top, mid-scroll, bottom, key sections, large-screen/mobile widths, and triggers such as hover, click, focus, scroll, resize, drag, load, submit, and media events. Include scroll-driven UI states such as header/nav transformations, sticky capsule bars, CTA reveal/hide, parallax, element scale/fade, lazy loading, and bottom-state changes.

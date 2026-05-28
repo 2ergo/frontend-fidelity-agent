@@ -80,6 +80,7 @@ In Website Clone Mode:
 - Use the template's reconnaissance expectations: screenshots, design token extraction, asset extraction, interaction sweep, responsive sweep, component specs, build, assembly, and visual QA.
 - Preserve the user's requirement for all observable pages/routes, navigation, hover states, click effects, scrolling, responsive behavior, overlays, forms, media, and motion.
 - Implement every discovered interaction/motion item, or explicitly list it as a gap with the reason.
+- Treat carousels, galleries, sliders, film strips, product selectors, media viewers, and horizontally scrollable card rails as first-class components. Reconnoiter and implement their controls, dragging/swiping, pagination, active states, hover states, click targets, animation timing, scroll snap, keyboard/focus behavior, autoplay/pause behavior, and responsive variants.
 - Do not directly copy proprietary images, logos, brand assets, paid media, or distinctive protected artwork from the source website.
 - When proprietary media cannot be reused, preserve layout geometry with same-size solid-color or gradient placeholder `div` blocks and still implement the original hover/click/motion behavior on those blocks.
 - If an image is necessary for the experience, use generated or permissively licensed replacement imagery that matches the role, aspect ratio, composition, and mood without copying protected assets.
@@ -224,12 +225,14 @@ Capture and preserve:
 - Interaction states: hover, active, focus, selected, disabled, loading, empty, and error states that are visible or discoverable.
 - Click behavior: navigation, modal, drawer, dropdown, popover, tab, carousel, accordion, filter, sort, pagination, load more, form submit, and close behavior.
 - Motion: transition timing, easing feel, hover motion, menu open/close, carousel, skeleton, section reveal, media behavior, scroll-triggered UI changes, and page transition behavior when observable.
+- Complex components: carousel, gallery, slider, film strip, product selector, color picker, media viewer, comparison rail, horizontal card rail, and tabbed content. Capture their navigation controls, drag/swipe behavior, scroll snap, pagination dots/arrows, active/disabled states, hover/click effects, focus/keyboard behavior, autoplay/pause rules, loop/clamp rules, transition timing, item sizing, visible item count, peeking cards, and responsive behavior.
 - Assets and content treatment: image aspect ratios, icon style, illustration style, media treatment, truncation, badges, tags, and data density.
 
 If using browser tooling, interact with the reference page:
 
 - Move the mouse over key controls to inspect hover states.
 - Click primary navigation, cards, buttons, menus, tabs, filters, and overlays.
+- For carousels/galleries/sliders, interact with every visible control: next/previous, dots, thumbnails, tabs, play/pause, drag/swipe, card clicks, hover states, keyboard focus, and mobile touch behavior.
 - Scroll top, middle, bottom, and each key section. Check threshold-based UI changes such as a global header becoming a product nav, sticky capsule bar, CTA appearing/disappearing, section title pinning, element scaling/fading, or parallax.
 - Inspect focus/active states for keyboard- or form-relevant controls.
 - Inspect video/media autoplay, pause, scrub, reveal, or lazy-load behavior when present.
@@ -250,6 +253,7 @@ Do not start from a single screenshot or first viewport. Inspect the whole page 
 - Viewports: large-screen, tablet when relevant, and mobile.
 - Triggers: hover, click, focus, active, scroll, resize, drag, load, submit, and media events.
 - Components: header, hero, nav, product nav, section nav, cards, lists, forms, menus, drawers, modals, carousels, video/media blocks, footer, and CTAs.
+- Complex components: carousel, slider, gallery, film strip, product selector, media viewer, horizontal card rail, tabbed content, and comparison rail.
 - Dynamic UI: scroll-driven header/nav transformations, sticky section labels, CTA reveal/hide, section reveal animations, lazy loading, parallax, element scale/fade, and bottom-of-page state changes.
 
 Create an interaction/motion inventory before coding. It can be a `docs/reconnaissance.md` file, a table in the implementation plan, or an equivalent structured note.
@@ -262,6 +266,7 @@ The inventory must record:
 - Initial state: position, size, color, content, visibility.
 - Changed state: what changes in style, layout, content, or visibility.
 - Motion: duration, easing feel, delay, direction, opacity, translate, scale, or rotation.
+- Component behavior: controls, pagination, drag/swipe, scroll snap, autoplay/pause, loop/clamp, keyboard/focus, active/disabled states, visible item count, peeking items, and mobile differences.
 - Scroll threshold: top, entering section, leaving section, after fixed pixels, near bottom.
 - Responsive difference: large-screen, tablet, mobile.
 - Implementation status: implemented, mocked, placeholder, or gap.

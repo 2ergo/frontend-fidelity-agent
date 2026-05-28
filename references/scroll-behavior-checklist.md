@@ -11,6 +11,7 @@ Confirm each container:
 - Sidebar.
 - Top tabs or category strip.
 - Table or kanban horizontal area.
+- Carousel, gallery, slider, film strip, or horizontal card rail.
 - Modal body.
 - Drawer body.
 - Dropdown menu.
@@ -41,6 +42,17 @@ Record:
 - Motion changes: fade, slide, scale, parallax, section reveal, image/video pinning, lazy-load reveal.
 - Thresholds: top, specific pixel offset, entering section, leaving section, midpoint, near bottom.
 - Bottom behavior: footer reveal, sticky controls ending, back-to-top, or load-more state.
+
+## Horizontal Rail and Carousel Scroll
+
+For carousel/gallery/slider/card-rail components, record:
+
+- Axis and owner: horizontal scroll container, carousel state machine, CSS scroll snap, or scripted transform.
+- Visible item count, item width, gap, peeking items, and container clipping.
+- Controls: arrows, dots, thumbnails, tabs, progress bar, play/pause.
+- Input: wheel, drag, swipe, touch, keyboard, click.
+- Boundary behavior: loop, clamp, disabled arrows, snap back, momentum.
+- Responsive behavior: desktop multi-card, tablet reduced count, mobile swipe/scroll-snap.
 
 ## Real Scroll Verification
 
