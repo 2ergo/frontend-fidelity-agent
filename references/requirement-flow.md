@@ -12,7 +12,7 @@ Startup order:
    - If the user wants full website cloning, switch to Website Clone Mode and skip stack selection.
    - Otherwise, use React only for URL-based generation/restoration.
 4. If the reference type is screenshot, mockup, Figma design, static design export, or UI image, switch to Screenshot Design Mode and ask React or Vue.
-5. If the reference type is PRD, ask technology stack unless an existing repo determines it.
+5. If the reference type is PRD, switch to PRD OpenDesign Mode and skip stack selection.
 6. Ask for reference materials only if none were already provided.
 7. Ask the single highest-impact missing question after analysis.
 
@@ -23,6 +23,8 @@ Exception: in Website Clone Mode, the stack is fixed by `JCodesMore/ai-website-c
 Exception: in Screenshot Design Mode, the generation stack must be React + Tailwind or Vue + Tailwind, and the user must choose React or Vue.
 
 Exception: URL-based generation/restoration outside Website Clone Mode supports React only.
+
+Exception: in PRD OpenDesign Mode, use `JCodesMore/ai-website-cloner-template` with Next.js + React + TypeScript + Tailwind + shadcn/ui, and use Open Design as the design-stage source.
 
 ## Website Clone Mode
 
@@ -64,6 +66,35 @@ Then:
 - Treat screenshot-to-code output as the initial implementation, not final acceptance.
 - Continue with layout, scroll, interaction, responsive, README, mock/API, and visual verification rules.
 - Ask for interaction notes when static references do not reveal hover/click/active states.
+
+## PRD OpenDesign Mode
+
+Trigger this mode when the primary reference is a PRD.
+
+Use `JCodesMore/ai-website-cloner-template` as the required frontend project foundation. Do not ask the user to choose the stack; use Next.js + React + TypeScript + Tailwind + shadcn/ui.
+
+Use Open Design as the design-stage source. Prefer MCP-first integration:
+
+- Keep `nexu-io/open-design` and `stackblitz-labs/bolt.diy` as separate projects.
+- Connect them through Open Design MCP and bolt.diy MCP settings.
+- Do not hard-merge Open Design source into bolt.diy for the first version.
+
+Use Open Design material in this order:
+
+1. `DESIGN.md` for design rules.
+2. `tokens.css` for variables/tokens.
+3. `components.html` or component references for component shape and layout.
+4. Artifacts/prototypes/entry HTML for page structure and visual reference.
+
+When bolt.diy is used, require the generation prompt or system prompt to:
+
+- Read the active Open Design project through MCP.
+- Use `DESIGN.md` as the primary visual authority.
+- Use `tokens.css` as CSS variable source.
+- Use component/prototype references when available.
+- Generate React frontend code according to the PRD.
+- Generate `docs/prd-coverage.md` mapping PRD requirements to routes/files/components.
+- Run/preview/build in WebContainer and repair issues.
 
 ## 1. Platform and Stack
 

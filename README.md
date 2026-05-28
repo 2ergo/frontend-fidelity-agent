@@ -27,6 +27,7 @@
 
 - 完整网站克隆：`JCodesMore/ai-website-cloner-template`
 - 截图/Mockup/Figma 生成：`abi/screenshot-to-code`
+- PRD 生成前端项目：`JCodesMore/ai-website-cloner-template` + Open Design
 - 风格探索：Open Design 设计阶段
 
 ## Codex 使用方式
@@ -86,8 +87,8 @@ Agent 默认遵循以下流程：
    - 用户要完整复刻整个网站时，进入“网站完整克隆模式”，跳过技术栈选择。
    - 非完整克隆的 URL 生成/还原只支持 React。
 5. 如果用户给的是截图、mockup、Figma 设计、UI 图片或静态设计导出，进入“截图设计稿生成模式”，要求用户指定 React 还是 Vue。
-6. 如果用户给的是 PRD，再单独确认技术栈：沿用现有项目，或选择 React、Vue、Next.js、Vite。
-7. 只有用户说没有偏好，或现有仓库已经明确技术栈时，才推荐默认技术栈。
+6. 如果用户给的是 PRD，进入“PRD + OpenDesign 生成模式”，跳过技术栈选择。
+7. 只有用户说没有偏好，或现有仓库已经明确技术栈时，才在普通模式中推荐默认技术栈。
 8. 分析参考材料、业务边界、页面结构、路由、交互、状态、响应式和滚动范围。
 9. 只追问无法从材料中可靠判断、且会影响实现的关键信息。
 10. 当用户需要设计探索、提供 Open Design 资料，或给了参考网站但只是想模仿风格而非一比一复制时，进入 Open Design 设计阶段。
@@ -133,6 +134,73 @@ npm install
 
 这个模式只用于完整复刻。  
 如果用户只是想“模仿某个网站风格”，不要使用完整克隆模式，应进入 Open Design 设计阶段。
+
+## PRD + OpenDesign 生成模式
+
+当用户指定的参考文件是 PRD 时，Agent 必须进入 PRD + OpenDesign 生成模式。
+
+工程基础强制使用：
+
+```text
+JCodesMore/ai-website-cloner-template
+```
+
+固定技术栈：
+
+- Next.js
+- React
+- TypeScript
+- Tailwind
+- shadcn/ui
+
+设计风格来源使用：
+
+```text
+nexu-io/open-design
+```
+
+推荐集成方式：**不要硬合并 Open Design 和 bolt.diy，第一版先用 MCP 打通。**
+
+推荐流程：
+
+```text
+PRD
+→ Open Design 生成或选择 DESIGN.md / tokens.css / components / prototype
+→ bolt.diy 通过 Open Design MCP 读取设计上下文
+→ bolt.diy 生成 React 前端项目
+→ WebContainer 运行、预览、修复
+→ 生成 docs/prd-coverage.md
+```
+
+Open Design 中优先读取：
+
+- `DESIGN.md`：给 LLM 的设计规范，作为主要视觉权威。
+- `tokens.css`：颜色、字体、间距、圆角、阴影等 CSS 变量来源。
+- `components.html`：组件和布局参考。
+- artifact / prototype / entry HTML：页面结构和视觉参考。
+
+bolt.diy 集成建议：
+
+- Open Design 保持独立，作为设计引擎。
+- bolt.diy 保持独立，作为代码生成和 WebContainer 运行环境。
+- 通过 bolt.diy 的 Settings → MCP tab 添加 Open Design MCP server。
+- 不要一开始把 `nexu-io/open-design` 源码整体合进 `stackblitz-labs/bolt.diy`。
+
+bolt.diy 生成时应使用类似约束：
+
+```text
+请根据下面 PRD 生成 React + TypeScript + Tailwind 前端项目。
+
+要求：
+1. 先通过 OpenDesign MCP 读取当前打开的 OpenDesign 项目。
+2. 使用 DESIGN.md 作为视觉设计规范。
+3. 使用 tokens.css 作为 Tailwind/CSS 变量来源。
+4. 如果存在 components.html 或 artifact，请参考其组件布局。
+5. 不要随意发明新的视觉风格。
+6. 生成 docs/prd-coverage.md，逐条说明 PRD 哪些需求已实现。
+```
+
+如果当前环境没有配置 Open Design MCP，Agent 应要求用户提供 `DESIGN.md`、`tokens.css`、`components.html` 或 Open Design artifact 导出，而不是凭空声称使用了 Open Design 风格。
 
 ## 截图设计稿生成模式
 
@@ -291,6 +359,14 @@ https://example.com
 /FrontendFidelityAgent
 
 根据这张 mockup 生成一个页面。请先问我要用 React 还是 Vue。
+```
+
+PRD 生成前端：
+
+```text
+/FrontendFidelityAgent
+
+这是一个 PRD。请使用 PRD + OpenDesign 生成模式，生成前端项目，并输出 docs/prd-coverage.md。
 ```
 
 风格借鉴：
