@@ -28,6 +28,20 @@ For each scroll container, record:
 - Touch behavior on mobile.
 - Background scroll behavior while overlays are open.
 
+## Scroll-Driven UI States
+
+For URL references and Website Clone Mode, inspect scroll-driven UI states before implementation.
+
+Record:
+
+- Header variants: initial global nav, compressed nav, product nav, sticky capsule bar, CTA bar, or hidden/revealed header.
+- Sticky section states: section title pinning, local nav sticking, tab/category bars sticking.
+- CTA changes: buy/explore/contact buttons appearing, disappearing, changing style, or becoming fixed.
+- Visual changes: background blur, transparency, shadow, border, radius, height, color, text, icon, or logo changes.
+- Motion changes: fade, slide, scale, parallax, section reveal, image/video pinning, lazy-load reveal.
+- Thresholds: top, specific pixel offset, entering section, leaving section, midpoint, near bottom.
+- Bottom behavior: footer reveal, sticky controls ending, back-to-top, or load-more state.
+
 ## Real Scroll Verification
 
 In `layout-confirmation.html`:

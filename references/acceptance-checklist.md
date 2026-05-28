@@ -17,6 +17,7 @@ Use this before final response.
 
 ## Interaction Fidelity
 
+- If a URL was used as a reference, Full Page Reconnaissance was completed before implementation and its inventory was used as the interaction/motion source of truth.
 - If Website Clone Mode was used, all observable routes/pages, hover states, click effects, overlays, menus, forms, scrolling, responsive states, and motion were inspected and either implemented or explicitly listed as gaps.
 - If Website Clone Mode avoided proprietary media, placeholder divs or replacement images preserve original dimensions/aspect ratios and still implement hover/click/motion effects.
 - If Screenshot Design Mode was used, interactions not visible in the screenshot/mockup/Figma design were requested from the user or clearly documented as assumptions.
@@ -27,11 +28,13 @@ Use this before final response.
 - Animations and transitions match the reference rhythm when feasible.
 - If auth is in scope without real APIs, mock login requires a user click, validates documented mock credentials, stores mock session state, supports logout, and keeps API integration behind replaceable service functions.
 - If a URL was used as a reference, key hover and click effects from the reference were inspected or explicitly marked as unavailable, then implemented or documented.
+- Every discovered interaction/motion item is implemented, mocked, replaced with an approved placeholder, or listed as a gap with the reason.
 
 ## Scroll Fidelity
 
 - Intended scroll containers actually scroll.
 - Fixed/sticky regions remain in place.
+- Scroll-driven UI states are implemented or listed as gaps, including header/nav variants, sticky section bars, CTA reveal/hide, parallax, reveal animations, and bottom-state changes.
 - Modal/drawer background scroll behavior is correct.
 - Horizontal scroll areas work.
 - Mobile/touch scroll behavior is checked when relevant.

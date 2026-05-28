@@ -76,8 +76,10 @@ In Website Clone Mode:
 - Force the template stack: Next.js + React + TypeScript + Tailwind + shadcn/ui.
 - Do not ask the user which stack to use.
 - Prefer the template's `/clone-website <target-url...>` workflow or its Codex-compatible clone-website skill/instructions when available.
+- Complete Full Page Reconnaissance before or during the template workflow. Do not implement from the first viewport or a single screenshot only.
 - Use the template's reconnaissance expectations: screenshots, design token extraction, asset extraction, interaction sweep, responsive sweep, component specs, build, assembly, and visual QA.
 - Preserve the user's requirement for all observable pages/routes, navigation, hover states, click effects, scrolling, responsive behavior, overlays, forms, media, and motion.
+- Implement every discovered interaction/motion item, or explicitly list it as a gap with the reason.
 - Do not directly copy proprietary images, logos, brand assets, paid media, or distinctive protected artwork from the source website.
 - When proprietary media cannot be reused, preserve layout geometry with same-size solid-color or gradient placeholder `div` blocks and still implement the original hover/click/motion behavior on those blocks.
 - If an image is necessary for the experience, use generated or permissively licensed replacement imagery that matches the role, aspect ratio, composition, and mood without copying protected assets.
@@ -213,26 +215,59 @@ Open Design can inform design direction and visual standards; FrontendFidelityAg
 
 When the user provides a URL as a visual or interaction reference, inspect it like a living product, not like a static screenshot.
 
+Before implementation, complete Full Page Reconnaissance and use its interaction/motion inventory as the implementation source of truth.
+
 Capture and preserve:
 
 - Visual design tokens: colors, typography, spacing, border radii, shadows, elevation, density, container widths, breakpoints, and background treatment.
 - Layout behavior: first viewport, below-the-fold content, sticky/fixed regions, responsive changes, scroll containers, and horizontal overflow.
 - Interaction states: hover, active, focus, selected, disabled, loading, empty, and error states that are visible or discoverable.
 - Click behavior: navigation, modal, drawer, dropdown, popover, tab, carousel, accordion, filter, sort, pagination, load more, form submit, and close behavior.
-- Motion: transition timing, easing feel, hover motion, menu open/close, carousel, skeleton, and page transition behavior when observable.
+- Motion: transition timing, easing feel, hover motion, menu open/close, carousel, skeleton, section reveal, media behavior, scroll-triggered UI changes, and page transition behavior when observable.
 - Assets and content treatment: image aspect ratios, icon style, illustration style, media treatment, truncation, badges, tags, and data density.
 
 If using browser tooling, interact with the reference page:
 
 - Move the mouse over key controls to inspect hover states.
 - Click primary navigation, cards, buttons, menus, tabs, filters, and overlays.
-- Scroll top, middle, and bottom.
+- Scroll top, middle, bottom, and each key section. Check threshold-based UI changes such as a global header becoming a product nav, sticky capsule bar, CTA appearing/disappearing, section title pinning, element scaling/fading, or parallax.
+- Inspect focus/active states for keyboard- or form-relevant controls.
+- Inspect video/media autoplay, pause, scrub, reveal, or lazy-load behavior when present.
 - Check large-screen and mobile widths when relevant.
 - Take screenshots of important states when possible.
 
 If the URL cannot be accessed or interactive states cannot be inspected, clearly ask the user for screenshots or behavior notes. Do not claim fidelity for states that were not inspected.
 
 For exact reproduction tasks, match the reference's style and interactions as closely as allowed. For style-imitation tasks, extract style attributes but keep product structure, content, and brand original.
+
+## Full Page Reconnaissance Rule
+
+For URL-based normal restoration and Website Clone Mode, reconnaissance must happen before implementation.
+
+Do not start from a single screenshot or first viewport. Inspect the whole page and all reachable observable states:
+
+- Page positions: top, mid-scroll, bottom, and each key section.
+- Viewports: large-screen, tablet when relevant, and mobile.
+- Triggers: hover, click, focus, active, scroll, resize, drag, load, submit, and media events.
+- Components: header, hero, nav, product nav, section nav, cards, lists, forms, menus, drawers, modals, carousels, video/media blocks, footer, and CTAs.
+- Dynamic UI: scroll-driven header/nav transformations, sticky section labels, CTA reveal/hide, section reveal animations, lazy loading, parallax, element scale/fade, and bottom-of-page state changes.
+
+Create an interaction/motion inventory before coding. It can be a `docs/reconnaissance.md` file, a table in the implementation plan, or an equivalent structured note.
+
+The inventory must record:
+
+- Page/route: URL, page name, and reachable entry.
+- Region: Header, Hero, Nav, Section, Card, Footer, etc.
+- Trigger: hover, click, focus, scroll, resize, drag, load, submit.
+- Initial state: position, size, color, content, visibility.
+- Changed state: what changes in style, layout, content, or visibility.
+- Motion: duration, easing feel, delay, direction, opacity, translate, scale, or rotation.
+- Scroll threshold: top, entering section, leaving section, after fixed pixels, near bottom.
+- Responsive difference: large-screen, tablet, mobile.
+- Implementation status: implemented, mocked, placeholder, or gap.
+- Notes: proprietary asset replacement, access limitations, or user confirmation needed.
+
+All discovered items must be implemented or listed as gaps before final delivery.
 
 ## Layout Confirmation HTML
 

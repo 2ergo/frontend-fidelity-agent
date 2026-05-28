@@ -40,6 +40,7 @@ Confirm only the essentials, one at a time:
 
 Website Clone Mode must cover:
 
+- Full Page Reconnaissance before implementation; do not rely on the first viewport only.
 - All observable pages/routes.
 - Navigation and link behavior.
 - Hover, active, focus, selected, disabled states.
@@ -47,6 +48,7 @@ Website Clone Mode must cover:
 - Scroll behavior, sticky/fixed areas, horizontal overflow, responsive breakpoints.
 - Visual tokens, assets, media, typography, spacing, colors, radii, shadows, motion.
 - Proprietary media handling: do not directly reuse protected images, logos, brand assets, paid media, or distinctive artwork. Preserve geometry with same-size solid-color/gradient placeholder divs, and keep hover/click/motion behavior. If imagery is required, use generated or permissively licensed replacement images with matching role/aspect/mood.
+- Interaction/motion inventory with page/route, region, trigger, initial state, changed state, motion, scroll threshold, responsive difference, implementation status, and notes.
 - Visual QA and README run instructions.
 
 ## Screenshot Design Mode
@@ -114,8 +116,10 @@ When a URL is provided, inspect it as an interactive reference when tools are av
 - Visual tokens: color, typography, spacing, radius, shadow, density, background, breakpoints.
 - Layout: viewport, below-fold content, sticky/fixed elements, scroll containers, responsive changes.
 - Interactions: hover, active, focus, selected, disabled, click, modal, drawer, dropdown, tab, carousel, filter, sort, pagination, forms.
-- Motion: transitions, easing, hover movement, open/close behavior.
+- Motion: transitions, easing, hover movement, open/close behavior, section reveal, media behavior, scroll-triggered UI changes.
 - Content treatment: images, icons, badges, truncation, empty states.
+
+Before implementation, create an interaction/motion inventory. Cover top, mid-scroll, bottom, key sections, large-screen/mobile widths, and triggers such as hover, click, focus, scroll, resize, drag, load, submit, and media events. Include scroll-driven UI states such as header/nav transformations, sticky capsule bars, CTA reveal/hide, parallax, element scale/fade, lazy loading, and bottom-state changes.
 
 If the user expects exact reproduction, match the reference's style and interactions as closely as allowed. If the user expects style imitation, extract visual attributes and keep the new product's structure/content/brand original.
 

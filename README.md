@@ -70,12 +70,6 @@ cursor/.cursor/rules/frontend-fidelity-agent.mdc
 <your-project>/.cursor/rules/frontend-fidelity-agent.mdc
 ```
 
-然后在 Cursor 中描述任务，例如：
-
-```text
-使用 FrontendFidelityAgent，根据这个 PRD 和截图实现页面。先确认技术栈和交互，不要直接写正式页面。
-```
-
 ## 工作流程
 
 Agent 默认遵循以下流程：
@@ -92,10 +86,11 @@ Agent 默认遵循以下流程：
 8. 分析参考材料、业务边界、页面结构、路由、交互、状态、响应式和滚动范围。
 9. 只追问无法从材料中可靠判断、且会影响实现的关键信息。
 10. 当用户需要设计探索、提供 Open Design 资料，或给了参考网站但只是想模仿风格而非一比一复制时，进入 Open Design 设计阶段。
-11. 非完整克隆模式下，必要时生成 `layout-confirmation.html` 低保真布局交互确认稿。
-12. 等用户确认页面、跳转、点击事件和滚动范围。
-13. 开始实现、运行项目、截图检查、验证交互和滚动，并继续修正。
-14. 在生成或大幅修改的前端项目 README 中写明安装、启动、构建、预览、测试和环境配置方式。
+11. URL 类输入在实现前必须先做全页交互/动效侦察。
+12. 非完整克隆模式下，必要时生成 `layout-confirmation.html` 低保真布局交互确认稿。
+13. 等用户确认页面、跳转、点击事件和滚动范围。
+14. 开始实现、运行项目、截图检查、验证交互和滚动，并继续修正。
+15. 在生成或大幅修改的前端项目 README 中写明安装、启动、构建、预览、测试和环境配置方式。
 
 ## 网站完整克隆模式
 
@@ -113,7 +108,7 @@ JCodesMore/ai-website-cloner-template
 https://github.com/JCodesMore/ai-website-cloner-template.git
 ```
 
-强制技术栈：
+固定技术栈：
 
 - Next.js
 - React
@@ -132,6 +127,8 @@ npm install
 
 如果当前 Codex 环境不能直接调用 `/clone-website`，Agent 应读取并遵循该模板中的 `AGENTS.md` 和 `.codex/skills/clone-website/SKILL.md`，而不是用普通方式粗略实现。
 
+完整克隆不是只还原静态首屏。Agent 必须先完整浏览目标页面，形成全页交互/动效侦察结果，再实现所有可观察页面、路由、hover、click、focus、scroll、responsive、motion、media、overlay、form 等行为。
+
 这个模式只用于完整复刻。  
 如果用户只是想“模仿某个网站风格”，不要使用完整克隆模式，应进入 Open Design 设计阶段。
 
@@ -146,6 +143,33 @@ Agent 必须遵守：
 - 占位块仍然要实现源站对应区域的 hover、click、motion、transition 等动态效果。
 - 如果用户体验必须使用图片，则使用生成图片或可合法使用的替代图片，要求匹配原图的用途、比例、构图和氛围，但不能复制受保护素材。
 - README 或交付说明中应标明哪些素材使用了占位或替代图片。
+
+## 全页交互/动效侦察
+
+对 URL 普通还原和网站完整克隆，Agent 在实现前必须完成 Full Page Reconnaissance。
+
+不能只看首屏或单张截图。必须检查：
+
+- 页面位置：top、mid-scroll、bottom、关键 section。
+- 视口：large-screen、必要时 tablet、mobile。
+- 触发方式：hover、click、focus、active、scroll、resize、drag、load、submit、media event。
+- 区域：Header、Hero、Nav、产品导航、section nav、Card、List、Form、Menu、Drawer、Modal、Carousel、Video、CTA、Footer。
+- 动态 UI：滚动驱动 Header/Nav 变化、sticky section title、CTA 出现/隐藏、section reveal、lazy load、parallax、元素缩放/淡入、页面底部状态变化。
+
+实现前需要形成 interaction/motion inventory，可以是 `docs/reconnaissance.md`，也可以是实现计划里的表格。至少记录：
+
+- 页面/路由：URL、页面名、可达入口。
+- 区域：Header、Hero、Nav、Section、Card、Footer 等。
+- 触发：hover、click、focus、scroll、resize、drag、load、submit。
+- 初始状态：位置、尺寸、颜色、内容、可见性。
+- 变化后状态：变化的属性和内容。
+- 动效：duration、easing 感觉、delay、方向、透明度、位移、缩放。
+- 滚动阈值：top、进入 section、离开 section、接近底部等。
+- 响应式差异：large-screen、tablet、mobile。
+- 实现状态：implemented / mocked / placeholder / gap。
+- 备注：专有素材替换、无法访问、需要用户确认。
+
+例如 Apple 产品页常见的行为：初始 Header 是全局导航；向下滚动到阈值后，变成产品局部导航或吸顶胶囊栏，并出现 Explore、Buy、Watch film 等 CTA。两种状态及其过渡都必须被侦察、记录并实现或列为 gap。
 
 ## PRD + OpenDesign 生成模式
 
@@ -190,27 +214,6 @@ Open Design 中优先读取：
 - `tokens.css`：颜色、字体、间距、圆角、阴影等 CSS 变量来源。
 - `components.html`：组件和布局参考。
 - artifact / prototype / entry HTML：页面结构和视觉参考。
-
-bolt.diy 集成建议：
-
-- Open Design 保持独立，作为设计引擎。
-- bolt.diy 保持独立，作为代码生成和 WebContainer 运行环境。
-- 通过 bolt.diy 的 Settings → MCP tab 添加 Open Design MCP server。
-- 不要一开始把 `nexu-io/open-design` 源码整体合进 `stackblitz-labs/bolt.diy`。
-
-bolt.diy 生成时应使用类似约束：
-
-```text
-请根据下面 PRD 生成 React + TypeScript + Tailwind 前端项目。
-
-要求：
-1. 先通过 OpenDesign MCP 读取当前打开的 OpenDesign 项目。
-2. 使用 DESIGN.md 作为视觉设计规范。
-3. 使用 tokens.css 作为 Tailwind/CSS 变量来源。
-4. 如果存在 components.html 或 artifact，请参考其组件布局。
-5. 不要随意发明新的视觉风格。
-6. 生成 docs/prd-coverage.md，逐条说明 PRD 哪些需求已实现。
-```
 
 如果当前环境没有配置 Open Design MCP，Agent 应要求用户提供 `DESIGN.md`、`tokens.css`、`components.html` 或 Open Design artifact 导出，而不是凭空声称使用了 Open Design 风格。
 
@@ -269,7 +272,8 @@ https://github.com/abi/screenshot-to-code
 - 首屏、首屏以下内容、固定/吸顶区域、响应式变化和滚动容器。
 - hover、active、focus、selected、disabled、loading、empty、error 等状态。
 - 点击按钮、卡片、导航、菜单、Tab、筛选、弹窗、抽屉、下拉、分页、表单等交互。
-- 动效节奏、hover 动效、展开/关闭动画、页面切换或轮播行为。
+- 动效节奏、hover 动效、展开/关闭动画、section reveal、media behavior、页面切换或轮播行为。
+- 滚动阈值变化，例如 Header 从全局导航变成产品导航、CTA 出现/隐藏、section nav 吸顶。
 
 如果无法访问 URL 或无法检查交互状态，Agent 必须说明限制，并向用户索要截图、录屏或交互说明。
 
@@ -396,6 +400,7 @@ PRD 生成前端：
 - 视觉布局尽量像素级接近。
 - 字体、间距、颜色、圆角、阴影、响应式一致。
 - 所有可见交互可用。
+- URL 类任务已完成全页交互/动效侦察，发现项已实现或列为 gap。
 - hover、active、loading、empty、error、disabled 等状态完整。
 - 动效节奏接近参考。
 - 滚动范围和 fixed/sticky 行为符合确认稿。
