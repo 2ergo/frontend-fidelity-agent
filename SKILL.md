@@ -12,17 +12,18 @@ Act as a high-fidelity frontend restoration agent. First analyze, then ask only 
 1. Ask exactly one startup question at a time. Do not present a multi-question checklist as the first response.
 2. Confirm that the target is a Web frontend.
 3. If the user wants to fully clone an existing website from URL, switch to Website Clone Mode and do not ask for a technology stack.
-4. Otherwise, ask the technology stack as its own separate question:
+4. If the user's primary reference is a screenshot, mockup, Figma design, static design export, or UI image, switch to Screenshot Design Mode and ask the user to choose React or Vue.
+5. Otherwise, ask the technology stack as its own separate question:
    - Web: React, Vue, Next.js, Vite.
-5. Only propose a default stack after the user says they have no preference, or when an existing repo clearly determines the stack. Do not silently choose Vite + React before asking.
-6. Collect references: URL, screenshot, UI design link, PRD, sketch, competitor page, or existing repo.
-7. Analyze page scope, routes, modules, layout, business flows, states, interactions, data needs, permissions, responsiveness, animation, and scrolling.
-8. Ask only about gaps that cannot be reliably inferred and would affect pages, routing, state, data, layout, scrolling, or implementation.
-9. When the user needs design exploration, provides Open Design references, or wants to imitate a reference site's style without copying it one-to-one, use the Open Design design-stage rule before layout confirmation.
-10. Generate `layout-confirmation.html` before high-fidelity implementation unless the user explicitly asks to skip it or Website Clone Mode applies.
-11. Get user confirmation on page structure, navigation, click events, scroll ranges, and business flow.
-12. Implement in the existing project style or the confirmed stack.
-13. Run the app, inspect it in browser or relevant preview tool, take screenshots, verify visual/interaction fidelity, and revise.
+6. Only propose a default stack after the user says they have no preference, or when an existing repo clearly determines the stack. Do not silently choose Vite + React before asking.
+7. Collect references: URL, screenshot, UI design link, PRD, sketch, competitor page, or existing repo.
+8. Analyze page scope, routes, modules, layout, business flows, states, interactions, data needs, permissions, responsiveness, animation, and scrolling.
+9. Ask only about gaps that cannot be reliably inferred and would affect pages, routing, state, data, layout, scrolling, or implementation.
+10. When the user needs design exploration, provides Open Design references, or wants to imitate a reference site's style without copying it one-to-one, use the Open Design design-stage rule before layout confirmation.
+11. Generate `layout-confirmation.html` before high-fidelity implementation unless the user explicitly asks to skip it or Website Clone Mode applies.
+12. Get user confirmation on page structure, navigation, click events, scroll ranges, and business flow.
+13. Implement in the existing project style or the confirmed stack.
+14. Run the app, inspect it in browser or relevant preview tool, take screenshots, verify visual/interaction fidelity, and revise.
 
 Do not start high-fidelity coding before page scope, key interactions, and scroll behavior are confirmed, unless the user explicitly says to decide and proceed.
 
@@ -34,6 +35,7 @@ Ask one question at a time during startup and confirmation gates.
 - Ask platform first.
 - Ask stack second.
 - Skip the stack question only when Website Clone Mode applies; in that mode the stack is fixed by the clone template.
+- In Screenshot Design Mode, ask specifically whether the user wants React or Vue.
 - Ask reference material third only if the user has not already provided it.
 - After analyzing provided material, ask the single highest-impact missing question next.
 - Group details only after the user asks for a summary or after enough context has been collected.
@@ -85,6 +87,31 @@ npm install
 ```
 
 If `/clone-website` is not directly callable in the current agent environment, follow the cloned template's `AGENTS.md` and `.codex/skills/clone-website/SKILL.md` instructions manually instead of improvising a loose clone.
+
+## Screenshot Design Mode
+
+Use Screenshot Design Mode when the user's primary reference is a screenshot, mockup, Figma design, static design export, or UI image.
+
+In Screenshot Design Mode:
+
+- Force the project generation workflow to use `abi/screenshot-to-code` or its workflow when available.
+- Require the user to choose React or Vue before generation.
+- Do not default to React or Vue without asking.
+- Use `React + Tailwind` or `Vue + Tailwind` according to the user's answer.
+- Treat screenshot-to-code output as the first draft, then continue with FrontendFidelityAgent verification and refinement.
+- Preserve the normal requirements for real scroll behavior, interactions, states, responsiveness, README run instructions, and mock/API boundaries.
+- If the screenshot, mockup, or Figma design does not reveal hover/click behavior, ask the user for behavior notes or infer only after clearly stating assumptions.
+
+Recommended setup pattern when using the open-source app locally:
+
+```text
+git clone https://github.com/abi/screenshot-to-code.git
+cd screenshot-to-code
+```
+
+Then follow the repository's current setup instructions for backend/frontend or Docker. The project supports converting screenshots, mockups, and Figma designs into code, including React + Tailwind and Vue + Tailwind outputs.
+
+If screenshot-to-code is not available in the current environment, use the same mode contract manually: generate React + Tailwind or Vue + Tailwind from the static reference, then inspect, run, screenshot, and refine.
 
 ## Required Confirmation Areas
 

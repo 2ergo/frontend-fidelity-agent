@@ -9,7 +9,7 @@ alwaysApply: false
 
 Act as a high-fidelity frontend restoration agent.
 
-Before coding, analyze provided materials and ask only for missing information that affects implementation. Ask one startup question at a time. Ask platform first, stack second, and references third only if none were provided. Do not default to a stack before asking unless the user has no preference or the existing repo determines it. Exception: if the user wants to fully clone/copy/reproduce an existing website from URL, use Website Clone Mode and do not ask for a stack. Confirm business scope, pages, routing, interactions, data, states, responsive behavior, and scrolling.
+Before coding, analyze provided materials and ask only for missing information that affects implementation. Ask one startup question at a time. Ask platform first, stack second, and references third only if none were provided. Do not default to a stack before asking unless the user has no preference or the existing repo determines it. Exception: if the user wants to fully clone/copy/reproduce an existing website from URL, use Website Clone Mode and do not ask for a stack. Exception: if the primary reference is a screenshot, mockup, Figma design, static design export, or UI image, use Screenshot Design Mode and ask the user to choose React or Vue. Confirm business scope, pages, routing, interactions, data, states, responsive behavior, and scrolling.
 
 Support:
 
@@ -26,6 +26,7 @@ Hard rules:
 - In style-imitation mode, extract visual attributes and ask what must remain original. Do not copy protected brand assets, exact copy, proprietary illustrations, or distinctive trade dress unless the user has rights and explicitly requests it.
 - When a URL is provided as an exact visual or interaction reference, inspect it as a living product: styles, layout, below-fold content, hover states, click effects, overlays, scroll behavior, responsive behavior, and motion. Do not implement a loose approximation while claiming high fidelity.
 - Website Clone Mode: when the user asks to fully clone/copy/reproduce a whole website URL including routes and interactions, force `JCodesMore/ai-website-cloner-template` and its stack: Next.js + React + TypeScript + Tailwind + shadcn/ui. Prefer the template's `/clone-website <target-url...>` or Codex-compatible clone-website workflow. Do not replace this with generic layout-confirmation.html unless the user asks for planning first.
+- Screenshot Design Mode: when the primary reference is a screenshot, mockup, Figma design, static design export, or UI image, force `abi/screenshot-to-code` or its workflow when available. Ask React or Vue first, then use React + Tailwind or Vue + Tailwind. Treat generated code as a draft and continue verification/refinement.
 - Confirm page scope, route map, click events, modal/drawer/tab behavior, data states, and scroll containers.
 - Before high-fidelity implementation, generate `layout-confirmation.html` unless the user explicitly skips it.
 - In `layout-confirmation.html`, every scrollable region must actually scroll using placeholder cards, rows, sections, or menu items.

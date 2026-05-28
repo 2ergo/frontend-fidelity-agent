@@ -8,13 +8,16 @@ Startup order:
 
 1. Ask target platform.
 2. If the user wants a full website clone from URL, switch to Website Clone Mode and skip stack selection.
-3. Ask technology stack only when Website Clone Mode does not apply.
-4. Ask for reference materials only if none were already provided.
-5. Ask the single highest-impact missing question after analysis.
+3. If the user's primary reference is a screenshot, mockup, Figma design, static design export, or UI image, switch to Screenshot Design Mode and ask React or Vue.
+4. Ask technology stack only when neither Website Clone Mode nor Screenshot Design Mode applies.
+5. Ask for reference materials only if none were already provided.
+6. Ask the single highest-impact missing question after analysis.
 
 Do not default to Vite + React, Next.js, Vue, or any other stack before asking. Recommend a default only after the user asks for advice or says they have no preference.
 
 Exception: in Website Clone Mode, the stack is fixed by `JCodesMore/ai-website-cloner-template`: Next.js + React + TypeScript + Tailwind + shadcn/ui.
+
+Exception: in Screenshot Design Mode, the generation stack must be React + Tailwind or Vue + Tailwind, and the user must choose React or Vue.
 
 ## Website Clone Mode
 
@@ -37,6 +40,25 @@ Website Clone Mode must cover:
 - Scroll behavior, sticky/fixed areas, horizontal overflow, responsive breakpoints.
 - Visual tokens, assets, media, typography, spacing, colors, radii, shadows, motion.
 - Visual QA and README run instructions.
+
+## Screenshot Design Mode
+
+Trigger this mode when the user provides a screenshot, mockup, Figma design, UI image, or static design export as the primary reference.
+
+Use `abi/screenshot-to-code` as the required generation workflow when available. It supports converting screenshots, mockups, and Figma designs into clean code, including React + Tailwind and Vue + Tailwind.
+
+Ask one question before generation:
+
+```text
+Do you want the generated project to use React or Vue?
+```
+
+Then:
+
+- Use React + Tailwind or Vue + Tailwind according to the user's answer.
+- Treat screenshot-to-code output as the initial implementation, not final acceptance.
+- Continue with layout, scroll, interaction, responsive, README, mock/API, and visual verification rules.
+- Ask for interaction notes when static references do not reveal hover/click/active states.
 
 ## 1. Platform and Stack
 

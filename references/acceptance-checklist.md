@@ -5,6 +5,7 @@ Use this before final response.
 ## Layout and Visual Fidelity
 
 - If Website Clone Mode was used, the implementation is based on `JCodesMore/ai-website-cloner-template` and uses Next.js + React + TypeScript + Tailwind + shadcn/ui.
+- If Screenshot Design Mode was used, the implementation uses `abi/screenshot-to-code` or its workflow, with the user-selected React + Tailwind or Vue + Tailwind stack.
 - Page hierarchy matches the confirmed layout.
 - Spacing, alignment, color, radius, shadow, typography, and density are close to reference.
 - Responsive behavior matches confirmed large-screen/tablet/mobile widths.
@@ -16,6 +17,7 @@ Use this before final response.
 ## Interaction Fidelity
 
 - If Website Clone Mode was used, all observable routes/pages, hover states, click effects, overlays, menus, forms, scrolling, responsive states, and motion were inspected and either implemented or explicitly listed as gaps.
+- If Screenshot Design Mode was used, interactions not visible in the screenshot/mockup/Figma design were requested from the user or clearly documented as assumptions.
 - Confirmed clicks work.
 - Route transitions, modals, drawers, tabs, dropdowns, and forms behave as confirmed.
 - Hover, active, focus, selected, disabled, loading, empty, and error states are implemented where visible or required.
