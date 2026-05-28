@@ -16,7 +16,6 @@ Confirm each container:
 - Dropdown menu.
 - Mobile bottom-sheet.
 - Mini-program `scroll-view`.
-- Desktop split pane.
 
 ## Required Behavior
 

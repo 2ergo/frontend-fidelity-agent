@@ -7,7 +7,7 @@ Use this before final response.
 - If Website Clone Mode was used, the implementation is based on `JCodesMore/ai-website-cloner-template` and uses Next.js + React + TypeScript + Tailwind + shadcn/ui.
 - Page hierarchy matches the confirmed layout.
 - Spacing, alignment, color, radius, shadow, typography, and density are close to reference.
-- Responsive behavior matches confirmed desktop/tablet/mobile widths.
+- Responsive behavior matches confirmed large-screen/tablet/mobile widths.
 - Long text, dense content, and narrow widths do not break layout.
 - If a reference site was used as a style target, the final UI captures the intended style attributes without copying protected brand assets, exact copy, or distinctive proprietary composition.
 - If Open Design or a design system was used, its chosen design constraints are visible in the final UI.

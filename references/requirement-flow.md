@@ -40,8 +40,8 @@ Website Clone Mode must cover:
 
 ## 1. Platform and Stack
 
-- Target: Web, mini-program, desktop app, or cross-platform.
-- Stack: existing repo stack, React, Vue, Next.js, Vite, WeChat Mini Program, Taro, uni-app, Electron, or Tauri.
+- Target: Web, mini-program, or cross-platform mini-program.
+- Stack: existing repo stack, React, Vue, Next.js, Vite, WeChat Mini Program, Taro, or uni-app.
 - Constraints: package manager, UI library, browser support, mobile support, deployment target.
 
 ## 2. References
@@ -140,7 +140,7 @@ Confirm:
 - Fixed/sticky header, tab bar, toolbar, sidebar, footer, bottom nav.
 - Modal/drawer background scroll behavior.
 - Horizontal scroll in tables, tabs, kanban, galleries.
-- Desktop, tablet, mobile viewports to verify.
+- Large-screen, tablet, and mobile viewports to verify.
 
 ## 8. Confirmation Gate
 
