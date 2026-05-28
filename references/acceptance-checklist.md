@@ -18,6 +18,7 @@ Use this before final response.
 ## Interaction Fidelity
 
 - If Website Clone Mode was used, all observable routes/pages, hover states, click effects, overlays, menus, forms, scrolling, responsive states, and motion were inspected and either implemented or explicitly listed as gaps.
+- If Website Clone Mode avoided proprietary media, placeholder divs or replacement images preserve original dimensions/aspect ratios and still implement hover/click/motion effects.
 - If Screenshot Design Mode was used, interactions not visible in the screenshot/mockup/Figma design were requested from the user or clearly documented as assumptions.
 - If PRD OpenDesign Mode was used, PRD flows, roles, routes, states, forms, mock/API assumptions, and edge cases are mapped in `docs/prd-coverage.md`.
 - Confirmed clicks work.

@@ -78,6 +78,9 @@ In Website Clone Mode:
 - Prefer the template's `/clone-website <target-url...>` workflow or its Codex-compatible clone-website skill/instructions when available.
 - Use the template's reconnaissance expectations: screenshots, design token extraction, asset extraction, interaction sweep, responsive sweep, component specs, build, assembly, and visual QA.
 - Preserve the user's requirement for all observable pages/routes, navigation, hover states, click effects, scrolling, responsive behavior, overlays, forms, media, and motion.
+- Do not directly copy proprietary images, logos, brand assets, paid media, or distinctive protected artwork from the source website.
+- When proprietary media cannot be reused, preserve layout geometry with same-size solid-color or gradient placeholder `div` blocks and still implement the original hover/click/motion behavior on those blocks.
+- If an image is necessary for the experience, use generated or permissively licensed replacement imagery that matches the role, aspect ratio, composition, and mood without copying protected assets.
 - Do not replace this mode with the generic `layout-confirmation.html` workflow unless the user explicitly asks for a planning wireframe first.
 - Keep the normal safety boundary: do not use cloning for phishing, impersonation, illegal scraping, terms-of-service violations, or copying protected brand assets/content without rights.
 - Update the generated project's `README.md` with the template stack, install/run/build/check commands, source URL(s), clone scope, and any gaps.

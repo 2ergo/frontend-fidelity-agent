@@ -46,6 +46,7 @@ Website Clone Mode must cover:
 - Click effects, modals, drawers, menus, tabs, accordions, carousels, filters, forms, pagination.
 - Scroll behavior, sticky/fixed areas, horizontal overflow, responsive breakpoints.
 - Visual tokens, assets, media, typography, spacing, colors, radii, shadows, motion.
+- Proprietary media handling: do not directly reuse protected images, logos, brand assets, paid media, or distinctive artwork. Preserve geometry with same-size solid-color/gradient placeholder divs, and keep hover/click/motion behavior. If imagery is required, use generated or permissively licensed replacement images with matching role/aspect/mood.
 - Visual QA and README run instructions.
 
 ## Screenshot Design Mode
