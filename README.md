@@ -32,6 +32,8 @@
 
 ## Codex 使用方式
 
+### 安装到 Codex
+
 将本仓库作为 Codex Skill 安装到 Codex skills 目录：
 
 ```text
@@ -44,21 +46,64 @@ Windows 示例：
 C:\Users\<your-name>\.codex\skills\frontend-fidelity-agent
 ```
 
-安装后，可以在 Codex 中这样触发：
+如果已经把本仓库克隆到本地，可以直接复制整个仓库目录到上面的 skills 目录。Windows 示例：
+
+```powershell
+Copy-Item -Path "C:\path\to\frontend-fidelity-agent\*" -Destination "C:\Users\<your-name>\.codex\skills\frontend-fidelity-agent" -Recurse -Force
+```
+
+### 在新项目中使用
+
+新建或打开任意前端项目后，在 Codex 中进入该项目目录，然后输入：
 
 ```text
 /FrontendFidelityAgent
 ```
 
-或：
+也可以用自然语言触发：
 
 ```text
 使用 FrontendFidelityAgent 帮我复原这个页面
 ```
 
+Agent 会先按顺序提问：
+
+1. 先确认目标是否是 Web 前端。
+2. 再询问参考类型：URL、mockup、Figma 设计、截图，还是 PRD。
+3. 根据参考类型自动进入对应模式。
+
+常用示例：
+
+```text
+/FrontendFidelityAgent
+
+我要 1:1 复刻这个网站，包括所有页面路由、hover、点击、滚动和动效：
+https://example.com
+```
+
+```text
+/FrontendFidelityAgent
+
+我有一张 mockup，请先问我要用 React 还是 Vue，然后生成前端项目。
+```
+
+```text
+/FrontendFidelityAgent
+
+这是一个 PRD，请使用 PRD + OpenDesign 模式生成前端项目，并输出 docs/prd-coverage.md。
+```
+
+注意：
+
+- 不需要每次新建项目都重新创建 Agent；只要 Codex skills 目录里已安装 `frontend-fidelity-agent`，在任何项目里都可以调用。
+- 如果更新了本仓库规则，需要重新复制到 Codex skills 目录，或重新安装该 Skill。
+- URL 1:1 复刻会先输出全页侦察结果和 `motion-spec` 动效确认，不会直接开始最终实现。
+
 ## Cursor 使用方式
 
-把 Cursor 规则文件复制到目标项目：
+### 安装到 Cursor 项目
+
+把本仓库中的 Cursor 规则文件复制到目标项目：
 
 ```text
 cursor/.cursor/rules/frontend-fidelity-agent.mdc
@@ -69,6 +114,35 @@ cursor/.cursor/rules/frontend-fidelity-agent.mdc
 ```text
 <your-project>/.cursor/rules/frontend-fidelity-agent.mdc
 ```
+
+Windows 示例：
+
+```powershell
+New-Item -ItemType Directory -Force -Path "C:\path\to\your-project\.cursor\rules"
+Copy-Item -Path "C:\path\to\frontend-fidelity-agent\cursor\.cursor\rules\frontend-fidelity-agent.mdc" -Destination "C:\path\to\your-project\.cursor\rules\frontend-fidelity-agent.mdc" -Force
+```
+
+### 在 Cursor 中使用
+
+打开目标项目后，在 Cursor Chat / Agent 中直接说明要使用该规则，例如：
+
+```text
+请按 FrontendFidelityAgent 规则帮我复原这个页面。
+```
+
+或：
+
+```text
+使用 FrontendFidelityAgent 流程，先确认平台和参考类型，再根据我的 URL 做 1:1 复刻。
+```
+
+Cursor 会根据 `.cursor/rules/frontend-fidelity-agent.mdc` 中的规则约束当前项目。建议每个需要使用该 Agent 的 Cursor 项目都复制一份规则文件。
+
+注意：
+
+- Cursor 中不是通过 `/FrontendFidelityAgent` 命令触发，而是通过项目内 `.cursor/rules` 规则影响 Agent 行为。
+- 如果规则更新了，需要把新的 `frontend-fidelity-agent.mdc` 再复制到目标项目。
+- URL 1:1 复刻同样需要先做 Full Page Reconnaissance 和 `motion-spec` 动效确认。
 
 ## 工作流程
 
