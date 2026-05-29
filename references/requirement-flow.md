@@ -48,7 +48,7 @@ Website Clone Mode must cover:
 - Carousel/gallery/slider behavior: controls, drag/swipe, scroll snap, pagination, active states, hover/click/focus, autoplay/pause, loop/clamp, responsive variants.
 - Scroll behavior, sticky/fixed areas, horizontal overflow, responsive breakpoints.
 - Visual tokens, assets, media, typography, spacing, colors, radii, shadows, motion.
-- Proprietary media handling: do not directly reuse protected images, logos, brand assets, paid media, or distinctive artwork. Preserve geometry with same-size solid-color/gradient placeholder divs, and keep hover/click/motion behavior. If imagery is required, use generated or permissively licensed replacement images with matching role/aspect/mood.
+- Proprietary media handling: do not directly reuse protected images, logos, brand assets, paid media, or distinctive artwork. Ask the user to choose one strategy: user-provided usable assets, user-authorized asset library, image2/image-generation replacement imagery, or same-size solid-color/gradient/skeleton placeholder blocks. Preserve geometry and hover/click/motion behavior for all strategies.
 - Interaction/motion inventory with page/route, region, trigger, initial state, changed state, motion, scroll threshold, responsive difference, implementation status, and notes.
 - Visual QA and README run instructions.
 

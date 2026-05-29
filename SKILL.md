@@ -82,8 +82,9 @@ In Website Clone Mode:
 - Implement every discovered interaction/motion item, or explicitly list it as a gap with the reason.
 - Treat carousels, galleries, sliders, film strips, product selectors, media viewers, and horizontally scrollable card rails as first-class components. Reconnoiter and implement their controls, dragging/swiping, pagination, active states, hover states, click targets, animation timing, scroll snap, keyboard/focus behavior, autoplay/pause behavior, and responsive variants.
 - Do not directly copy proprietary images, logos, brand assets, paid media, or distinctive protected artwork from the source website.
-- When proprietary media cannot be reused, preserve layout geometry with same-size solid-color or gradient placeholder `div` blocks and still implement the original hover/click/motion behavior on those blocks.
-- If an image is necessary for the experience, use generated or permissively licensed replacement imagery that matches the role, aspect ratio, composition, and mood without copying protected assets.
+- When proprietary media cannot be reused, ask the user to choose a media replacement strategy before final implementation.
+- Supported media replacement strategies: user-provided usable assets, user-authorized asset library, image2/image-generation replacement imagery, or same-size solid-color/gradient/skeleton placeholder blocks.
+- For every strategy, preserve the original layout geometry, aspect ratio, hover/click/motion behavior, and interaction targets.
 - Do not replace this mode with the generic `layout-confirmation.html` workflow unless the user explicitly asks for a planning wireframe first.
 - Keep the normal safety boundary: do not use cloning for phishing, impersonation, illegal scraping, terms-of-service violations, or copying protected brand assets/content without rights.
 - Update the generated project's `README.md` with the template stack, install/run/build/check commands, source URL(s), clone scope, and any gaps.
@@ -98,6 +99,30 @@ npm install
 ```
 
 If `/clone-website` is not directly callable in the current agent environment, follow the cloned template's `AGENTS.md` and `.codex/skills/clone-website/SKILL.md` instructions manually instead of improvising a loose clone.
+
+## Media Replacement Strategy Rule
+
+When source-site proprietary media cannot be reused, ask the user to choose one strategy:
+
+1. User-provided usable assets.
+2. User-authorized asset library.
+3. `image2` or another image-generation model/tool to generate replacement images.
+4. Same-size solid-color, gradient, or skeleton placeholder blocks.
+
+Do not silently choose a strategy unless the user has already specified one.
+
+For image-generation replacements:
+
+- Generate replacement images that match role, aspect ratio, composition, color mood, visual density, and overall use case.
+- Do not copy logos, trademarks, distinctive protected artwork, proprietary product imagery, or recognizable brand assets from the source site.
+- Store generated images in a clear generated-assets location such as `public/generated` or `src/assets/generated`.
+
+For placeholder replacements:
+
+- Use same-size blocks that preserve spacing, clipping, border radius, responsive behavior, and layout rhythm.
+- Keep hover, click, transition, carousel, gallery, and media-viewer behaviors attached to the placeholder.
+
+Document the chosen strategy, generated assets, placeholders, and any remaining media gaps in the generated project's `README.md`.
 
 ## Screenshot Design Mode
 
