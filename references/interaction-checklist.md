@@ -29,6 +29,41 @@ Record an interaction/motion inventory with:
 - Implementation status: implemented, mocked, placeholder, or gap.
 - Notes: proprietary media replacement, access limitation, or user confirmation needed.
 
+## Motion Reverse Engineering
+
+For URL references that require one-to-one reproduction, inspect motion before implementation and produce a user-confirmable `motion-spec`.
+
+Observe:
+
+- Initial load at `0s`, `0.5s`, `1s`, `2s`, and `5s`.
+- Idle behavior after the page sits untouched.
+- Before and after any timed auto-scroll or autoplay transition.
+- Key section enter/leave states.
+- Hover, click, focus, drag, scroll, resize, and media states.
+
+Record:
+
+- Trigger source: page load, idle timer, scroll threshold, hover, click, focus, drag, media event, section enter, or section leave.
+- Timeline: sampled timestamps, delays, loops, cycle duration, and autoplay cadence.
+- CSS/JS properties: transform, opacity, filter, blur, scale, rotate, translate, clip-path, mask, z-index, video/canvas/WebGL state, or scroll-timeline behavior.
+- Motion path and speed: linear, orbital, radial, vertical, horizontal, parallax, snap, easing feel, direction, transform origin, and acceleration/deceleration.
+- Loop behavior: infinite, finite, ping-pong, carousel loop, clamp, pause, resume, and reset.
+- Pause/resume conditions: hover pause, pointer leave resume, modal open pause, viewport leave pause, reduced-motion fallback.
+- State machine: default, loading, idle, hovering, active, paused, transitioning, section-entered, section-left, completed.
+- User confirmation and implementation status: pending, confirmed, implemented, approximated, or gap.
+
+For the ardot-style hero example, the inventory should be able to describe effects with terms like:
+
+- `ambient orbital rotation`
+- `angle-dependent blur filter`
+- `hover-triggered 3D flip`
+- `hover pauses ambient rotation`
+- `initial scale-down entrance animation`
+- `timed auto-scroll to next section`
+- `section scale-in/scale-out transition`
+
+Do not start one-to-one implementation until the motion behavior is summarized and confirmed by the user, unless the user explicitly chooses to let the agent decide.
+
 ## Clicks and Navigation
 
 - Buttons.

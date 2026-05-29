@@ -23,6 +23,9 @@ Use this before final response.
 - Icon source is explicit. Proprietary source-site logos/brand icons were not reused without rights; replacements preserve semantic meaning, size, color, hover/click/focus/active states, motion, and hit area. README documents icon source and integration method.
 - If Screenshot Design Mode was used, interactions not visible in the screenshot/mockup/Figma design were requested from the user or clearly documented as assumptions.
 - If PRD OpenDesign Mode was used, PRD flows, roles, routes, states, forms, mock/API assumptions, and edge cases are mapped in `docs/prd-coverage.md`.
+- If one-to-one URL reproduction was requested, a `motion-spec` was produced before implementation and confirmed or supplemented by the user.
+- Every `motion-spec` item is marked implemented, approximated, or gap. No discovered animation is silently omitted.
+- Initial-load, idle/autoplay, hover, click, auto-scroll, section-transition, scroll-threshold, and responsive motion states have verification notes when they are present in the reference.
 - Confirmed clicks work.
 - Route transitions, modals, drawers, tabs, dropdowns, and forms behave as confirmed.
 - Hover, active, focus, selected, disabled, loading, empty, and error states are implemented where visible or required.

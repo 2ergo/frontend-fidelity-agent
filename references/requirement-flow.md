@@ -125,6 +125,16 @@ When a URL is provided, inspect it as an interactive reference when tools are av
 
 Before implementation, create an interaction/motion inventory. Cover top, mid-scroll, bottom, key sections, large-screen/mobile widths, and triggers such as hover, click, focus, scroll, resize, drag, load, submit, and media events. Include scroll-driven UI states such as header/nav transformations, sticky capsule bars, CTA reveal/hide, parallax, element scale/fade, lazy loading, and bottom-state changes.
 
+For one-to-one URL reproduction, add a URL motion confirmation gate before implementation:
+
+- Perform Motion Reverse Engineering on the reference URL.
+- Sample the timeline at `0s`, `0.5s`, `1s`, `2s`, `5s`, before/after auto-scroll or autoplay transitions, and key section enter/leave points.
+- Inspect hover, click, focus, scroll, drag, media, loading, idle, and responsive states.
+- Output a `motion-spec` that records area, element, trigger, initial state, motion description, estimated parameters, state changes, user confirmation, and implementation status.
+- Ask the user to confirm, correct, or supplement missing motion behavior.
+- Do not start one-to-one implementation until the `motion-spec` is confirmed or the user explicitly says to decide and proceed.
+- If the browser tool cannot observe the timeline, state the limitation and ask for a screen recording, screenshots, or behavior notes.
+
 If the user expects exact reproduction, match the reference's style and interactions as closely as allowed. If the user expects style imitation, extract visual attributes and keep the new product's structure/content/brand original.
 
 Classify each reference:

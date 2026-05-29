@@ -77,6 +77,7 @@ In Website Clone Mode:
 - Do not ask the user which stack to use.
 - Prefer the template's `/clone-website <target-url...>` workflow or its Codex-compatible clone-website skill/instructions when available.
 - Complete Full Page Reconnaissance before or during the template workflow. Do not implement from the first viewport or a single screenshot only.
+- For one-to-one URL reproduction, complete Motion Reverse Engineering and output a user-confirmable `motion-spec` before implementation. Wait for user confirmation or supplements before coding the final clone.
 - Use the template's reconnaissance expectations: screenshots, design token extraction, asset extraction, interaction sweep, responsive sweep, component specs, build, assembly, and visual QA.
 - Preserve the user's requirement for all observable pages/routes, navigation, hover states, click effects, scrolling, responsive behavior, overlays, forms, media, and motion.
 - Implement every discovered interaction/motion item, or explicitly list it as a gap with the reason.
@@ -286,6 +287,8 @@ When the user provides a URL as a visual or interaction reference, inspect it li
 
 Before implementation, complete Full Page Reconnaissance and use its interaction/motion inventory as the implementation source of truth.
 
+For one-to-one URL reproduction, also complete Motion Reverse Engineering and output a `motion-spec` for user confirmation before coding.
+
 Capture and preserve:
 
 - Visual design tokens: colors, typography, spacing, border radii, shadows, elevation, density, container widths, breakpoints, and background treatment.
@@ -341,6 +344,60 @@ The inventory must record:
 - Notes: proprietary asset replacement, access limitations, or user confirmation needed.
 
 All discovered items must be implemented or listed as gaps before final delivery.
+
+## Motion Reverse Engineering Rule
+
+For URL-based normal restoration and Website Clone Mode, when the user expects one-to-one reproduction, reverse-engineer observable motion before implementation and summarize it as a user-confirmable `motion-spec`.
+
+Do not start final implementation until the user confirms the `motion-spec` or supplements missing motion details.
+
+Observe at least three state classes:
+
+- Initial load: first paint, entrance animation, preloader, initial transforms, default visibility, and first viewport motion.
+- Idle timeline: how the page behaves after it sits untouched for several seconds, including autoplay, ambient loops, delayed reveals, and timed navigation.
+- User interaction states: hover, click, focus, drag, scroll, resize, media controls, and form actions.
+
+For URL pages, sample the timeline at:
+
+- `0s`, `0.5s`, `1s`, `2s`, and `5s` after load.
+- Before and after any timed auto-scroll, autoplay transition, or delayed reveal.
+- When entering and leaving key sections.
+- At relevant scroll thresholds and responsive breakpoints.
+
+Actively look for and record:
+
+- Continuous rotation, orbiting, marquee, floating, pulsing, shimmer, and ambient loop motion.
+- Angle-dependent or position-dependent effects such as `filter: blur(...)`, opacity, scale, shadow, color, or z-index changes.
+- Hover pause/resume behavior for ambient motion.
+- Hover-triggered transforms such as 3D flip, `rotateY`, tilt, lift, scale, blur removal, or image swap.
+- Initial scale-in or scale-down entrance animation.
+- Timed auto-scroll to the next section.
+- Section scale-in, scale-out, fade, blur, parallax, sticky, pinned, or snap transitions.
+- Opacity, blur, transform, filter, clip-path, mask, video, canvas, WebGL, or scroll-timeline changes.
+
+Use professional motion language in the `motion-spec` where useful. Example terms:
+
+- `ambient orbital rotation`
+- `angle-dependent blur filter`
+- `hover-triggered 3D flip`
+- `hover pauses ambient rotation`
+- `initial scale-down entrance animation`
+- `timed auto-scroll to next section`
+- `section scale-in/scale-out transition`
+
+The `motion-spec` may be a `docs/motion-spec.md` file, a table in the implementation plan, or an equivalent structured message. It must include:
+
+- Area: Hero floating badges, Header, CTA, Section 2 preview, etc.
+- Element: circular image, logo, button, page container, second-screen image, etc.
+- Trigger: page load, idle timer, scroll threshold, hover, click, focus, drag, section enter, section leave.
+- Initial state: scale, opacity, blur, transform, position, z-index, visibility.
+- Motion description: professional name plus plain-language behavior.
+- Estimated parameters: duration, delay, easing feel, loop, direction, speed, transform origin, path, and filter blur range.
+- State changes: pause/resume, flip, blur change, auto-scroll, section transition, active/selected state.
+- User confirmation: confirmed, needs change, or missing.
+- Implementation status: pending, implemented, approximated, or gap.
+
+If browser tooling cannot observe the timeline, say so clearly and ask the user for a screen recording, additional screenshots, or motion notes. Do not claim one-to-one motion fidelity for unobserved states.
 
 ## Layout Confirmation HTML
 

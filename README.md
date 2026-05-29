@@ -238,6 +238,34 @@ Agent 必须侦察并实现：
 
 如果因为权限、素材或技术限制无法实现某个轮播行为，必须在交付说明中列为 gap，不能默默降级成静态图。
 
+## 动效反向侦察与确认
+
+当用户给 URL 并要求 1:1 还原时，Agent 不能只看首屏或静态截图就开始写代码。它必须先观察页面的时间轴、滚动转场、hover/click 状态和自动播放行为，并输出 `motion-spec` 让用户确认。
+
+`motion-spec` 至少记录：
+
+- 区域：Hero floating badges、Header、CTA、Section 2 preview 等。
+- 元素：圆形图片、Logo、按钮、页面容器、第二屏大图等。
+- 触发：page load、idle timer、scroll threshold、hover、click、section enter。
+- 初始状态：scale、opacity、blur、transform、position、z-index。
+- 动效描述：专业名称 + 自然语言描述。
+- 参数估计：duration、delay、easing、loop、direction、transform-origin、filter blur 范围。
+- 状态变化：hover 后暂停旋转、flip、blur 变化、auto-scroll 触发。
+- 用户确认：confirmed / needs change / missing。
+- 实现状态：pending / implemented / approximated / gap。
+
+例如 ardot 类页面，Agent 应该先总结并确认这些动效，而不是直接实现：
+
+- 四周小圆图的 `ambient orbital rotation`，保持匀速环绕/旋转。
+- 不同角度出现不同程度的 `angle-dependent blur filter`。
+- 鼠标 hover 到圆形元素时触发 `hover-triggered 3D flip`。
+- hover 期间 `hover pauses ambient rotation`，离开后恢复。
+- 页面刚打开时存在 `initial scale-down entrance animation`。
+- 静置一段时间后触发 `timed auto-scroll to next section`。
+- 第二屏进入时有 `section scale-in/scale-out transition`。
+
+用户可以补充遗漏的动效。确认前，Agent 不得进入 1:1 最终实现；如果浏览器工具无法观察时间轴，Agent 必须要求用户提供录屏、截图或补充说明。
+
 ## PRD + OpenDesign 生成模式
 
 当用户指定的参考文件是 PRD 时，Agent 必须进入 PRD + OpenDesign 生成模式。
