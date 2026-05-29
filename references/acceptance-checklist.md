@@ -20,6 +20,7 @@ Use this before final response.
 - If a URL was used as a reference, Full Page Reconnaissance was completed before implementation and its inventory was used as the interaction/motion source of truth.
 - If Website Clone Mode was used, all observable routes/pages, hover states, click effects, overlays, menus, forms, scrolling, responsive states, and motion were inspected and either implemented or explicitly listed as gaps.
 - If Website Clone Mode avoided proprietary media, the user-selected replacement strategy was followed: user-provided assets, authorized asset library, image2/generated replacements, or same-size placeholder blocks. Replacement media/placeholders preserve dimensions/aspect ratios and still implement hover/click/motion effects.
+- Icon source is explicit. Proprietary source-site logos/brand icons were not reused without rights; replacements preserve semantic meaning, size, color, hover/click/focus/active states, motion, and hit area. README documents icon source and integration method.
 - If Screenshot Design Mode was used, interactions not visible in the screenshot/mockup/Figma design were requested from the user or clearly documented as assumptions.
 - If PRD OpenDesign Mode was used, PRD flows, roles, routes, states, forms, mock/API assumptions, and edge cases are mapped in `docs/prd-coverage.md`.
 - Confirmed clicks work.

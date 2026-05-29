@@ -84,6 +84,7 @@ In Website Clone Mode:
 - Do not directly copy proprietary images, logos, brand assets, paid media, or distinctive protected artwork from the source website.
 - When proprietary media cannot be reused, ask the user to choose a media replacement strategy before final implementation.
 - Supported media replacement strategies: user-provided usable assets, user-authorized asset library, image2/image-generation replacement imagery, or same-size solid-color/gradient/skeleton placeholder blocks.
+- When source-site icons, logos, or brand marks cannot be reused, ask the user to choose an icon source strategy before final implementation.
 - For every strategy, preserve the original layout geometry, aspect ratio, hover/click/motion behavior, and interaction targets.
 - Do not replace this mode with the generic `layout-confirmation.html` workflow unless the user explicitly asks for a planning wireframe first.
 - Keep the normal safety boundary: do not use cloning for phishing, impersonation, illegal scraping, terms-of-service violations, or copying protected brand assets/content without rights.
@@ -123,6 +124,48 @@ For placeholder replacements:
 - Keep hover, click, transition, carousel, gallery, and media-viewer behaviors attached to the placeholder.
 
 Document the chosen strategy, generated assets, placeholders, and any remaining media gaps in the generated project's `README.md`.
+
+## Icon Source Strategy Rule
+
+When a project needs icons, or when source-site proprietary icons/logos/brand marks cannot be reused, ask the user to choose one icon source strategy:
+
+1. User-provided icon assets such as SVG, PNG, or a zip package.
+2. User-provided accessible Alibaba Iconfont resources.
+3. User-specified public icon library such as lucide, react-icons, Heroicons, or Radix icons.
+4. `image2` or another image-generation model/tool for simple non-brand icons.
+5. CSS, text, or geometric placeholder icons.
+
+Do not directly reuse proprietary logos, brand icons, trademarks, or distinctive protected icons from the source website.
+
+Preserve:
+
+- Icon semantic meaning.
+- Size, position, color, stroke/fill style, and visual weight.
+- Hover, click, focus, active, selected, and disabled states.
+- Motion, transition, and target hit area.
+
+### Alibaba Iconfont Access
+
+Alibaba Iconfont project pages often require login or project membership. If the user only provides an Iconfont project page URL and it is not publicly accessible, do not pretend it was read.
+
+Ask the user to provide one accessible input:
+
+- Downloaded SVG files or zip package.
+- Public `iconfont.js` Symbol link.
+- Public `iconfont.css` Font class link.
+- Locally exported `iconfont.js`, `iconfont.css`, and font files.
+- Icon name list plus screenshots, so equivalent icons can be selected from a public library or generated.
+
+Default recommendation:
+
+1. Local SVG/zip assets.
+2. Local or accessible Symbol `iconfont.js`.
+3. Local or accessible Font class `iconfont.css` and font files.
+4. Public icon library.
+5. Generated simple non-brand icons.
+6. CSS/text/geometric placeholders.
+
+Document icon source, integration method, Iconfont access assumptions, and any substituted icons in the generated project's `README.md`.
 
 ## Screenshot Design Mode
 

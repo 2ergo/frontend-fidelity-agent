@@ -49,6 +49,7 @@ Website Clone Mode must cover:
 - Scroll behavior, sticky/fixed areas, horizontal overflow, responsive breakpoints.
 - Visual tokens, assets, media, typography, spacing, colors, radii, shadows, motion.
 - Proprietary media handling: do not directly reuse protected images, logos, brand assets, paid media, or distinctive artwork. Ask the user to choose one strategy: user-provided usable assets, user-authorized asset library, image2/image-generation replacement imagery, or same-size solid-color/gradient/skeleton placeholder blocks. Preserve geometry and hover/click/motion behavior for all strategies.
+- Icon source strategy: when source-site icons, logos, or brand marks cannot be reused, ask the user to choose user-provided SVG/PNG/zip, accessible Alibaba Iconfont resources, a public icon library such as lucide/react-icons/Heroicons/Radix icons, image2/generated simple icons, or CSS/text/geometric placeholders. Record icon semantics, size, color, state, motion, and replacement source.
 - Interaction/motion inventory with page/route, region, trigger, initial state, changed state, motion, scroll threshold, responsive difference, implementation status, and notes.
 - Visual QA and README run instructions.
 
@@ -120,6 +121,7 @@ When a URL is provided, inspect it as an interactive reference when tools are av
 - Motion: transitions, easing, hover movement, open/close behavior, section reveal, media behavior, scroll-triggered UI changes.
 - Complex components: carousel, gallery, slider, film strip, product selector, media viewer, horizontal rail, tabbed content. Inspect controls, pagination, active/disabled states, drag/swipe, scroll snap, autoplay/pause, keyboard/focus, item sizing, peeking cards, and responsive behavior.
 - Content treatment: images, icons, badges, truncation, empty states.
+- If Alibaba Iconfont is requested, use only accessible exported assets or links: local SVG/zip, `iconfont.js`, `iconfont.css`, font files, or icon name list plus screenshots. Do not rely on login-only project pages.
 
 Before implementation, create an interaction/motion inventory. Cover top, mid-scroll, bottom, key sections, large-screen/mobile widths, and triggers such as hover, click, focus, scroll, resize, drag, load, submit, and media events. Include scroll-driven UI states such as header/nav transformations, sticky capsule bars, CTA reveal/hide, parallax, element scale/fade, lazy loading, and bottom-state changes.
 

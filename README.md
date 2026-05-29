@@ -149,6 +149,51 @@ Agent 必须遵守：
 - 如果使用 image2 或图像生成模型，生成图只匹配用途、比例、构图、色彩氛围和视觉密度，不能复制 Logo、商标、专有产品图、强识别品牌资产或受保护插画。
 - README 或交付说明中应标明哪些素材使用了用户素材、授权素材库、生成图或占位块。
 
+### 图标来源策略
+
+当项目需要图标，或源站图标、Logo、品牌标识不能复用时，Agent 必须先让用户选择图标来源策略。
+
+可选策略：
+
+1. 用户提供图标素材包，例如 SVG、PNG、zip。
+2. 用户提供可访问的阿里 Iconfont 资源。
+3. 使用指定公共图标库，例如 lucide、react-icons、Heroicons、Radix icons。
+4. 使用 image2 / 图像生成模型生成简单的非品牌图标。
+5. 使用纯 CSS、文字或几何占位图标。
+
+Agent 不得直接复用源站专有 Logo、品牌图标、商标或强识别受保护图标。
+
+无论使用哪种策略，都要保留：
+
+- 图标语义。
+- 尺寸、位置、颜色、描边/填充风格和视觉重量。
+- hover、click、focus、active、selected、disabled 状态。
+- 动效、transition 和点击热区。
+
+#### 阿里 Iconfont 访问说明
+
+阿里矢量图标库项目页经常需要登录或项目权限。  
+如果用户只给了一个需要登录的 Iconfont 项目页面 URL，Agent 不能假装已经读取。
+
+用户应提供以下任一可访问输入：
+
+- 下载后的 SVG 文件或 zip 包。
+- 公开可访问的 `iconfont.js` Symbol 链接。
+- 公开可访问的 `iconfont.css` Font class 链接。
+- 项目导出的本地 `iconfont.js`、`iconfont.css` 和字体文件。
+- 图标名称清单 + 截图，用于从公共图标库选择等价图标，或生成简单替代图标。
+
+默认推荐优先级：
+
+1. 本地 SVG/zip，最稳。
+2. 本地或可访问的 Symbol `iconfont.js`。
+3. 本地或可访问的 Font class `iconfont.css` 和字体文件。
+4. 公共图标库。
+5. 生成的非品牌简单图标。
+6. CSS/文字/几何占位。
+
+项目 README 或交付说明中必须写明图标来源、接入方式、Iconfont 访问假设和替换说明。
+
 ## 全页交互/动效侦察
 
 对 URL 普通还原和网站完整克隆，Agent 在实现前必须完成 Full Page Reconnaissance。
