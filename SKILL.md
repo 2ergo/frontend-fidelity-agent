@@ -78,6 +78,7 @@ In Website Clone Mode:
 - Prefer the template's `/clone-website <target-url...>` workflow or its Codex-compatible clone-website skill/instructions when available.
 - Complete Full Page Reconnaissance before or during the template workflow. Do not implement from the first viewport or a single screenshot only.
 - For one-to-one URL reproduction, complete Motion Reverse Engineering and output a user-confirmable `motion-spec` before implementation. Wait for user confirmation or supplements before coding the final clone.
+- For one-to-one URL reproduction, treat failed live reconnaissance as a hard gate. If timeline sampling, hover/click checks, or scroll-state checks cannot be completed, stop and ask for a screen recording, screenshots, or explicit user approval before implementing.
 - Use the template's reconnaissance expectations: screenshots, design token extraction, asset extraction, interaction sweep, responsive sweep, component specs, build, assembly, and visual QA.
 - Preserve the user's requirement for all observable pages/routes, navigation, hover states, click effects, scrolling, responsive behavior, overlays, forms, media, and motion.
 - Implement every discovered interaction/motion item, or explicitly list it as a gap with the reason.
@@ -351,6 +352,19 @@ For URL-based normal restoration and Website Clone Mode, when the user expects o
 
 Do not start final implementation until the user confirms the `motion-spec` or supplements missing motion details.
 
+### Reconnaissance Hard Gate
+
+For one-to-one URL reproduction, `motion-spec confirmation required` is a blocking gate.
+
+If live browser reconnaissance fails, the agent must:
+
+- Say exactly which observations failed: timeline sampling, hover state, click state, scroll threshold, autoplay, auto-scroll, media, or responsive state.
+- Ask the user for one of: a screen recording, additional screenshots at timestamps/states, or explicit approval to proceed with approximations.
+- Mark affected `motion-spec` rows as `missing` or `needs confirmation`, not `implemented` or `approximated`.
+- Stop before final implementation unless the user explicitly approves the approximation scope.
+
+Do not continue to build a one-to-one clone from source HTML, first viewport screenshots, or inferred structure alone when the requested fidelity depends on live motion.
+
 Observe at least three state classes:
 
 - Initial load: first paint, entrance animation, preloader, initial transforms, default visibility, and first viewport motion.
@@ -363,6 +377,14 @@ For URL pages, sample the timeline at:
 - Before and after any timed auto-scroll, autoplay transition, or delayed reveal.
 - When entering and leaving key sections.
 - At relevant scroll thresholds and responsive breakpoints.
+
+For pages with automatic scrolling or timed section changes, add `auto-scroll page sampling`:
+
+- Capture the true first screen immediately after load.
+- Capture the state just before the automatic scroll trigger.
+- Capture the state immediately after the automatic scroll completes.
+- Manually return to the top and verify whether the first-screen animation resets, pauses, or resumes.
+- Record whether automatic scrolling can cause later sections to be mistaken for the initial viewport.
 
 Actively look for and record:
 
@@ -384,6 +406,9 @@ Use professional motion language in the `motion-spec` where useful. Example term
 - `initial scale-down entrance animation`
 - `timed auto-scroll to next section`
 - `section scale-in/scale-out transition`
+- `auto-scroll page sampling`
+
+For Ardot-style complex hero sections, explicitly check for orbital rotation, angle-dependent blur, hover flip, hover pause/resume, initial scale-down, timed auto-scroll, and second-section scale transition.
 
 The `motion-spec` may be a `docs/motion-spec.md` file, a table in the implementation plan, or an equivalent structured message. It must include:
 

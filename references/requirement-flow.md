@@ -129,11 +129,12 @@ For one-to-one URL reproduction, add a URL motion confirmation gate before imple
 
 - Perform Motion Reverse Engineering on the reference URL.
 - Sample the timeline at `0s`, `0.5s`, `1s`, `2s`, `5s`, before/after auto-scroll or autoplay transitions, and key section enter/leave points.
+- For automatic-scroll pages, perform `auto-scroll page sampling`: true first screen, just before auto-scroll, just after auto-scroll, and manual return-to-top reset behavior.
 - Inspect hover, click, focus, scroll, drag, media, loading, idle, and responsive states.
 - Output a `motion-spec` that records area, element, trigger, initial state, motion description, estimated parameters, state changes, user confirmation, and implementation status.
 - Ask the user to confirm, correct, or supplement missing motion behavior.
-- Do not start one-to-one implementation until the `motion-spec` is confirmed or the user explicitly says to decide and proceed.
-- If the browser tool cannot observe the timeline, state the limitation and ask for a screen recording, screenshots, or behavior notes.
+- `motion-spec confirmation required`: do not start one-to-one implementation until the `motion-spec` is confirmed or the user explicitly approves approximations.
+- Reconnaissance hard gate: if the browser tool cannot observe the timeline, hover/click states, scroll thresholds, autoplay, or auto-scroll behavior, state the limitation and ask for a screen recording, screenshots, or behavior notes. Do not continue final implementation from inferred behavior alone.
 
 If the user expects exact reproduction, match the reference's style and interactions as closely as allowed. If the user expects style imitation, extract visual attributes and keep the new product's structure/content/brand original.
 

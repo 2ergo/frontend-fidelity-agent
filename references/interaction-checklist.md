@@ -33,11 +33,14 @@ Record an interaction/motion inventory with:
 
 For URL references that require one-to-one reproduction, inspect motion before implementation and produce a user-confirmable `motion-spec`.
 
+`motion-spec confirmation required` is a hard gate. If live browser reconnaissance fails, stop before final implementation and ask for a screen recording, timestamped screenshots, or explicit approval to approximate.
+
 Observe:
 
 - Initial load at `0s`, `0.5s`, `1s`, `2s`, and `5s`.
 - Idle behavior after the page sits untouched.
 - Before and after any timed auto-scroll or autoplay transition.
+- Automatic-scroll pages: true first screen, just before auto-scroll, just after auto-scroll, and manual return-to-top behavior.
 - Key section enter/leave states.
 - Hover, click, focus, drag, scroll, resize, and media states.
 
@@ -51,6 +54,7 @@ Record:
 - Pause/resume conditions: hover pause, pointer leave resume, modal open pause, viewport leave pause, reduced-motion fallback.
 - State machine: default, loading, idle, hovering, active, paused, transitioning, section-entered, section-left, completed.
 - User confirmation and implementation status: pending, confirmed, implemented, approximated, or gap.
+- Failed observations: timeline sampling, hover state, click state, scroll threshold, autoplay, auto-scroll, media, or responsive state.
 
 For the ardot-style hero example, the inventory should be able to describe effects with terms like:
 
@@ -61,6 +65,9 @@ For the ardot-style hero example, the inventory should be able to describe effec
 - `initial scale-down entrance animation`
 - `timed auto-scroll to next section`
 - `section scale-in/scale-out transition`
+- `auto-scroll page sampling`
+
+For Ardot-style hero sections, explicitly check orbital rotation, angle-dependent blur, hover-triggered flip, hover pause/resume, initial scale-down entrance, timed auto-scroll, and second-section scale transition.
 
 Do not start one-to-one implementation until the motion behavior is summarized and confirmed by the user, unless the user explicitly chooses to let the agent decide.
 

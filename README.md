@@ -340,6 +340,21 @@ Agent 必须侦察并实现：
 
 用户可以补充遗漏的动效。确认前，Agent 不得进入 1:1 最终实现；如果浏览器工具无法观察时间轴，Agent 必须要求用户提供录屏、截图或补充说明。
 
+### 侦察失败硬阻断
+
+URL 1:1 复刻时，`motion-spec confirmation required` 是硬性门槛。  
+如果浏览器工具无法完成 live timeline sampling、hover/click 检查、scroll threshold 检查、autoplay 或 auto-scroll 观察，Agent 必须先停下来，说明缺失项，并要求用户提供录屏、时间点截图、交互说明，或明确批准按近似方案继续。不能只凭首屏、HTML 或推测继续最终实现。
+
+对于会自动滚动的页面，Agent 必须做 `auto-scroll page sampling`：
+
+- 记录真正的 `0s` 首屏。
+- 记录自动滚动触发前状态。
+- 记录自动滚动完成后的状态。
+- 手动回到顶部，确认首屏动效是否重置、暂停或继续。
+- 防止把自动滚动后的第二屏误判成首屏。
+
+Ardot 类复杂首屏需要额外检查：orbital rotation、angle-dependent blur、hover flip、hover pause、initial scale-down、timed auto-scroll、section scale transition。
+
 ## PRD + OpenDesign 生成模式
 
 当用户指定的参考文件是 PRD 时，Agent 必须进入 PRD + OpenDesign 生成模式。

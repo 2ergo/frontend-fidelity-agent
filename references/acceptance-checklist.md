@@ -24,8 +24,10 @@ Use this before final response.
 - If Screenshot Design Mode was used, interactions not visible in the screenshot/mockup/Figma design were requested from the user or clearly documented as assumptions.
 - If PRD OpenDesign Mode was used, PRD flows, roles, routes, states, forms, mock/API assumptions, and edge cases are mapped in `docs/prd-coverage.md`.
 - If one-to-one URL reproduction was requested, a `motion-spec` was produced before implementation and confirmed or supplemented by the user.
+- If one-to-one URL reproduction was requested and live reconnaissance failed, implementation was blocked until the user provided screen recording/screenshots/notes or explicitly approved approximations.
 - Every `motion-spec` item is marked implemented, approximated, or gap. No discovered animation is silently omitted.
 - Initial-load, idle/autoplay, hover, click, auto-scroll, section-transition, scroll-threshold, and responsive motion states have verification notes when they are present in the reference.
+- Automatic-scroll pages were verified at true first screen, before auto-scroll, after auto-scroll, and manual return-to-top behavior.
 - Confirmed clicks work.
 - Route transitions, modals, drawers, tabs, dropdowns, and forms behave as confirmed.
 - Hover, active, focus, selected, disabled, loading, empty, and error states are implemented where visible or required.
